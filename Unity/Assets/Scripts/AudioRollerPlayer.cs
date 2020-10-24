@@ -12,7 +12,11 @@ namespace DefaultNamespace
 
     private bool IsPlayingRails;
     private Rigidbody _body;
+
+    private Vector3 _lastVel;
     public AudioSource Source { get; set; }
+
+    public float LastHitEnemyTime;
 
     private void Awake()
     {
@@ -25,6 +29,20 @@ namespace DefaultNamespace
       if (AudioController.Instance == null)
         return;
       UpdateRails();
+      UpdateWallHit();
+    }
+
+    private void UpdateWallHit()
+    {
+      var newVel = _body.velocity;
+      var timeSinceEnemyHit = Time.time - LastHitEnemyTime;
+      if ((_lastVel - newVel).magnitude > 2
+          && timeSinceEnemyHit > 0.3)
+      {
+        AudioController.Instance.PlayHitWall(Source);
+        LastHitEnemyTime = Time.time;
+      }
+      _lastVel = newVel;
     }
 
     private void UpdateRails()

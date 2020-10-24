@@ -70,11 +70,14 @@ namespace DefaultNamespace
         toDetach = Math.Max(1, (int) (totalCount * 0.1f));
 
       toDetach *= collision.gameObject.GetComponent<BonusCollector>().KillBonus;
-      
+
       Debug.Log($"force {force} total {totalCount} res {toDetach}");
 
       if (_audio != null)
+      {
+        _audio.LastHitEnemyTime = Time.time;
         AudioController.Instance.PlayHitEnemy(_audio.Source);
+      }
 
       if (toDetach == 0)
         return;
