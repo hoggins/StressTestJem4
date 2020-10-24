@@ -107,24 +107,6 @@ public class CatPlacer : MonoBehaviour
     var elapsed = 0f;
     const float duration = 1f;
 
-    // var center = transform.position;
-    // var startForward = Quaternion.LookRotation((center - catGo.transform.position).normalized, Vector3.up);
-    //
-    // var targetWorld = transform.TransformPoint(targetPoint);
-    // var endForward = Quaternion.LookRotation((center - targetWorld).normalized, Vector3.up);
-    //
-    // var distanceToTarget = Vector3.Distance(center, targetWorld);
-    // var distanceToStart = Vector3.Distance(center, catGo.transform.position);
-    //
-    //
-    //
-    //
-    // var realStart = catGo.transform.localPosition;
-    //   var posStart = startForward * Vector3.forward * distanceToStart;
-    //   var posEnd = endForward * Vector3.forward * distanceToTarget;
-
-    // Debug.Log($"start {catGo.transform.localPosition} {posStart}");
-
     var currentCatRotation = catGo.transform.localRotation;
     var targetCatRotation = Random.rotation;
     do
@@ -133,8 +115,6 @@ public class CatPlacer : MonoBehaviour
 
       var t = elapsed / duration;
 
-      // var currentRotation = Quaternion.Slerp(startForward, endForward, t);
-      // catGo.transform.localPosition = currentRotation * Vector3.forward * Mathf.Lerp(distanceToStart, distanceToTarget, t);
       catGo.transform.localPosition = Vector3.Lerp(startPoint, targetPoint, t);
       catGo.transform.localRotation = Quaternion.Lerp(currentCatRotation, targetCatRotation, t);
 
