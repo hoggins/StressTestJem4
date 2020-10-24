@@ -90,7 +90,10 @@ public class CatPlacer : MonoBehaviour
   public void AttachCat(GameObject catGo, bool silent = false)
   {
     if (!silent && _audio != null)
+    {
+      _audio.LastHitEnemyTime = Time.time;
       AudioController.Instance.PlayPickCat(_audio.Source);
+    }
 
     AttachedCatsCount++;
 

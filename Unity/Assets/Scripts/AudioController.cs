@@ -10,7 +10,7 @@ namespace Controllers
   {
     public AudioClip[] HitEnemy;
     public AudioClip[] PickCat;
-    public AudioClip[] RandomPhrases;
+    public AudioClip[] HitWall;
 
     public AudioSource Player;
     public AudioSource PlayerRails;
@@ -43,6 +43,10 @@ namespace Controllers
       PlayRandom(audioSource, PickCat);
     }
 
+    public void PlayHitWall(AudioSource audioSource)
+    {
+      PlayRandom(audioSource, HitWall);
+    }
 
     private Coroutine _musicCoroutine;
     private bool _isPlayingMenuMusic;

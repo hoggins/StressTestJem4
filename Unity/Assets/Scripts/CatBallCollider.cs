@@ -77,7 +77,10 @@ namespace DefaultNamespace
       Debug.Log($"force {force} total {totalCount} res {toDetach}");
 
       if (_audio != null)
+      {
+        _audio.LastHitEnemyTime = Time.time;
         AudioController.Instance.PlayHitEnemy(_audio.Source);
+      }
 
       if (toDetach == 0)
         return;
