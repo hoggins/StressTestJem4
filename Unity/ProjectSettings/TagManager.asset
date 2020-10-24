@@ -7,6 +7,9 @@ TagManager:
   - Bot
   - Cat
   - WinTrigger
+  - SpeedBonus
+  - KillBonus
+  - DoubleTakeBonus
   layers:
   - Default
   - TransparentFX

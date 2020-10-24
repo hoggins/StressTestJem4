@@ -7,6 +7,7 @@ namespace UnityStandardAssets.Vehicles.Ball
     {
       [SerializeField] public AnimationCurve PowerCurveBySize;
         [SerializeField] public float m_MovePower = 5; // The force added to the ball to move it.
+        [SerializeField] public float m_bonusMult = 1;
         [SerializeField] public float m_MovePowerBonus = 0;
         [SerializeField] public bool m_UseTorque = true; // Whether or not to use torque to move the ball.
         [SerializeField] public float m_MaxAngularVelocity = 25; // The maximum velocity the ball can rotate at.
@@ -29,7 +30,7 @@ namespace UnityStandardAssets.Vehicles.Ball
         public void Move(Vector3 moveDirection, bool jump)
         {
           var power = PowerCurveBySize.Evaluate(_collider.radius);
-          var powerWithBonus = power + m_MovePowerBonus;
+          var powerWithBonus = (power + m_MovePowerBonus) * m_bonusMult;
             // If using torque to rotate the ball...
             if (m_UseTorque)
             {
