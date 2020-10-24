@@ -70,7 +70,7 @@ public class CatPlacer : MonoBehaviour
     {
       var go = Instantiate(DefaultCat);
       AttachCat(go, Vector3.zero);
-      yield return new WaitForSeconds(0.3f);
+      yield return new WaitForSeconds(1f);
     }
   }
 
@@ -90,7 +90,8 @@ public class CatPlacer : MonoBehaviour
 
     catGo.GetComponent<CatControl>().PrepareToBePart();
     catGo.transform.SetParent(transform, true);
-    catGo.transform.localPosition = point; /*+ (Random.insideUnitSphere * 0.5f)*/
+    catGo.transform.localPosition = point /*+ (Random.insideUnitSphere * 0.1f)*/;
+    catGo.transform.localRotation = Random.rotation;
 
     _busyPointsByLevel[_busyPointsByLevel.Count-1].Add(catGo);
 
