@@ -61,7 +61,13 @@ public class CatPlacer : MonoBehaviour
   {
     if (other.gameObject.CompareTag("Cat"))
     {
+      var count = GetComponent<BonusCollector>().DoubleBonus;
       AttachCat(other.gameObject);
+      
+      for (int i = 1; i < count; i++)
+      {
+        AttachCat(Instantiate(other.gameObject));
+      }
     }
   }
 

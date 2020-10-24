@@ -7,6 +7,7 @@ namespace DefaultNamespace
   public class CatSpawner : MonoBehaviour
   {
     public int TargetAliveCatCount;
+    public GameObject ActorRoot;
     
     void Awake()
     {

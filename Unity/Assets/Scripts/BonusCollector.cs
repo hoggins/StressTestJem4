@@ -19,6 +19,10 @@ public class BonusCollector : MonoBehaviour
   private Coroutine _speedCoroutine;
   private Coroutine _killCoroutine;
   private Coroutine _doubleCoroutine;
+
+  public GameObject SpeedUpEffect;
+  public GameObject KillEffect;
+  public GameObject DoubleBonusEffect;
   
   [NonSerialized]
   public int KillBonus = 1;
@@ -28,6 +32,9 @@ public class BonusCollector : MonoBehaviour
   void Awake()
   {
     _ball = GetComponent<Ball>();
+    SpeedUpEffect.SetActive(false);
+    KillEffect.SetActive(false);
+    DoubleBonusEffect.SetActive(false);
   }
 
   private void OnTriggerEnter(Collider other)
@@ -75,10 +82,13 @@ public class BonusCollector : MonoBehaviour
   private IEnumerator StartSpeedUpBonus()
   {
     _ball.m_bonusMult = SpeedUpPower;
+    ActivateEffect(SpeedUpEffect, true);
 
     yield return new WaitForSeconds(SpeedUpDuration);
+    ActivateEffect(SpeedUpEffect, false);
 
     _ball.m_bonusMult = 1f;
+    SpeedUpEffect.SetActive(false);
     if (_speedCoroutine != null)
     {
       StopCoroutine(_speedCoroutine);
@@ -90,7 +100,9 @@ public class BonusCollector : MonoBehaviour
   {
     KillBonus = 2;
 
+    ActivateEffect(KillEffect, true);
     yield return new WaitForSeconds(KillDuration);
+    ActivateEffect(KillEffect, false);
 
     KillBonus = 1;
     
@@ -105,7 +117,9 @@ public class BonusCollector : MonoBehaviour
   {
     DoubleBonus = 2;
 
+    ActivateEffect(DoubleBonusEffect, true);
     yield return new WaitForSeconds(DoubleDuration);
+    ActivateEffect(DoubleBonusEffect, false);
 
     DoubleBonus = 1;
     
@@ -116,4 +130,8 @@ public class BonusCollector : MonoBehaviour
     }
   }
 
+  private void ActivateEffect(GameObject go, bool active)
+  {
+    go.gameObject.SetActive(active);
+  }
 }
