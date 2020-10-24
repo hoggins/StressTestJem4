@@ -85,6 +85,9 @@ public class CatControl : MonoBehaviour
       SelectRandomState();
 
     _currentState?.Update();
+
+    if (transform.position.y < -100)
+      Destroy(gameObject);
   }
 
   private void FixedUpdate()
