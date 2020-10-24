@@ -23,14 +23,9 @@ namespace DefaultNamespace.CatStates
         _elapsed = 0f;
       }
 
-      var transformForward = Control.transform.forward;
-      transformForward.y = 0f;
-      transformForward = transformForward.normalized;
-      
-      // Control.transform.rotation = Quaternion.Lerp(Control.transform.rotation, Quaternion.LookRotation(transformForward, Vector3.up), Time.deltaTime);
-      
-      Control.Body.MoveRotation(Quaternion.Lerp(Control.Body.rotation, Quaternion.LookRotation(Control.Body.velocity.normalized),
-        Time.deltaTime * 2f));
+      if(Control.Body.velocity.magnitude > 0.01f)
+        Control.Body.MoveRotation(Quaternion.Lerp(Control.Body.rotation, Quaternion.LookRotation(Control.Body.velocity.normalized),
+          Time.deltaTime * 2f));
     }
   }
 }
