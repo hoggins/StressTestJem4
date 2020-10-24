@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 13500000}
   - component: {fileID: 5400000}
   - component: {fileID: 11400000}
+  - component: {fileID: 2414288406005869178}
   m_Layer: 8
   m_Name: RollerBallBase
   m_TagString: Untagged
@@ -124,6 +125,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovePower: 5
+  m_MovePowerBonus: 0
   m_UseTorque: 1
   m_MaxAngularVelocity: 25
   m_JumpPower: 4
+--- !u!114 &2414288406005869178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b21ea0dd7e7b843b1fbe38453e3216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultCat: {fileID: 535946751894229678, guid: 58fb24c1d965d6840878113538df1aee,
+    type: 3}
+  SizeByLevel:
+  - 0.62
+  - 0.74
+  - 1.01
+  - 1.22
+  - 1.4
+  - 1.72

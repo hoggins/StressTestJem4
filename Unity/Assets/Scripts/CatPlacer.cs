@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,26 +6,13 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
-public readonly struct GizmosColor : IDisposable
-{
-  private readonly Color _oldColor;
-
-  public GizmosColor(Color red)
-  {
-    _oldColor = Gizmos.color;
-    Gizmos.color = red;
-  }
-
-  public void Dispose()
-  {
-    Gizmos.color = _oldColor;
-  }
-}
-
 [RequireComponent(typeof(SphereCollider))]
 public class CatPlacer : MonoBehaviour
 {
-  public GameObject Cat;
+  public int Level => _freePointsByLevel.Count;
+  public int CatsAttached => _busyPointsByLevel.Sum(x => x.Count);
+
+  public GameObject DefaultCat;
 
   public float[] SizeByLevel = new[]
   {
@@ -37,8 +23,6 @@ public class CatPlacer : MonoBehaviour
     1.4f,
     1.72f
   };
-
-  public int Level => _freePointsByLevel.Count;
 
   private SphereCollider Collider;
 
@@ -54,22 +38,27 @@ public class CatPlacer : MonoBehaviour
 
   void Start()
   {
-    var go = GameObject.Find("App");
-    _pointProvider = go.GetComponent<CatPointProvider>();
+    _pointProvider = GameObject.Find("App").GetComponent<CatPointProvider>();
 
 
+    for (int i = 0; i < 3; i++)
+    {
+      AttachCat(Instantiate(DefaultCat));
+    }
+    StartCoroutine(Fade());
   }
 
   IEnumerator Fade()
   {
     while (true)
     {
-      AttachCat(Vector3.back);
+      var go = Instantiate(DefaultCat);
+      AttachCat(go);
       yield return new WaitForSeconds(0.3f);
     }
   }
 
-  public void AttachCat(Vector3 sourcePoint)
+  public void AttachCat(GameObject catGo)
   {
     var freeLevel = _freePointsByLevel.FirstOrDefault(x => x.Count > 0);
     if (freeLevel == null)
@@ -81,10 +70,11 @@ public class CatPlacer : MonoBehaviour
     var point = freeLevel[freeLevel.Count - 1];
     freeLevel.RemoveAt(freeLevel.Count - 1);
 
-    var go = Instantiate(Cat, transform);
-    go.transform.localPosition = point; /*+ (Random.insideUnitSphere * 0.5f)*/
-    go.name = $"l{_freePointsByLevel.Count} i{freeLevel.Count}";
-    _busyPointsByLevel[_busyPointsByLevel.Count-1].Add(go);
+    catGo.GetComponent<CatControl>().PrepareToBePart();
+    catGo.transform.SetParent(transform, true);
+    catGo.transform.localPosition = point; /*+ (Random.insideUnitSphere * 0.5f)*/
+
+    _busyPointsByLevel[_busyPointsByLevel.Count-1].Add(catGo);
 
     UpdateStats();
   }
@@ -128,7 +118,8 @@ public class CatPlacer : MonoBehaviour
   {
     while (_freePointsByLevel.Count <= layer || _freePointsByLevel.Last().Count > 0)
     {
-      AttachCat(Vector3.back);
+      var go = Instantiate(DefaultCat);
+      AttachCat(go);
     }
   }
 }
