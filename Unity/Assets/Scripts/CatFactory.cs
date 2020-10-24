@@ -7,10 +7,7 @@ public class CatFactory : MonoBehaviour
 
   public Color[] Colors = new []{Color.blue};
 
-  public Mesh[] Meshes;
-
-  public GameObject DefaultCat;
-
+  public GameObject[] Prefabs;
 
   private System.Random Random = new System.Random();
   private void Awake()
@@ -20,15 +17,15 @@ public class CatFactory : MonoBehaviour
 
   public GameObject MakeCat()
   {
-    var go = Instantiate(DefaultCat);
+    var prefab = Prefabs[Random.Next(Prefabs.Length)];
+
+    var go = Instantiate(prefab);
 
     var ren = go.GetComponent<Renderer>();
     var newMat = new Material(ren.material);
     newMat.SetColor("_BaseColor", Colors[Random.Next(Colors.Length)]);
     ren.material = newMat;
 
-    var meshFilter = go.GetComponent<MeshFilter>();
-    meshFilter.mesh = Meshes[Random.Next(Meshes.Length)];
 
     return go;
   }
