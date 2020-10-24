@@ -1307,7 +1307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676a689330d6407cb0e9107d85b393b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StepScale: 20
+  StepScale: 15
   Container: {fileID: 919132149155446097, guid: 9408e5e00a688434db600d1b8475e8d4,
     type: 3}
 --- !u!4 &1673841056
