@@ -24,7 +24,7 @@
 
     public override bool CanSelect()
     {
-      return Control.CatPlacer.AttachedCatsCount > 50;
+      return Control.CatPlacer.CatsAttached > 50;
     }
   }
 }

@@ -26,8 +26,6 @@ public class CatPlacer : MonoBehaviour
     1.72f
   };
 
-  public int AttachedCatsCount { get; private set; }
-
   private SphereCollider Collider;
 
   private List<List<Vector3>> _freePointsByLevel = new List<List<Vector3>>();
@@ -94,8 +92,6 @@ public class CatPlacer : MonoBehaviour
       _audio.LastHitEnemyTime = Time.time;
       AudioController.Instance.PlayPickCat(_audio.Source);
     }
-
-    AttachedCatsCount++;
 
     var freeLevel = _freePointsByLevel.FirstOrDefault(x => x.Count > 0);
     if (freeLevel == null)

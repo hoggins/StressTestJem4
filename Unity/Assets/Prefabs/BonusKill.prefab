@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: KillBonus
       objectReference: {fileID: 0}
+    - target: {fileID: 829544010216775091, guid: f7cc2a65cec3eae4184903b54c04cd81,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 21b3f4e4460ee9b41800f302404a81db, type: 2}
     - target: {fileID: 829544010216775093, guid: f7cc2a65cec3eae4184903b54c04cd81,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -77,5 +82,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8931527007090262925, guid: f7cc2a65cec3eae4184903b54c04cd81,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 21b3f4e4460ee9b41800f302404a81db, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7cc2a65cec3eae4184903b54c04cd81, type: 3}
