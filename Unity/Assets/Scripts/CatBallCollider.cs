@@ -15,6 +15,7 @@ namespace DefaultNamespace
 
     void OnCollisionEnter(Collision collision)
     {
+      return;
       if (!collision.gameObject.CompareTag("Bot") && !collision.gameObject.CompareTag("Player"))
         return;
 
