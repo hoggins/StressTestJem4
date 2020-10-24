@@ -69,6 +69,8 @@ namespace DefaultNamespace
       else if (force >= 1)
         toDetach = Math.Max(1, (int) (totalCount * 0.1f));
 
+      toDetach *= collision.gameObject.GetComponent<BonusCollector>().KillBonus;
+      
       Debug.Log($"force {force} total {totalCount} res {toDetach}");
 
       if (_audio != null)

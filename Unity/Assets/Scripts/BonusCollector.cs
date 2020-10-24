@@ -9,8 +9,8 @@ public class BonusCollector : MonoBehaviour
   private Ball _ball;
   
   public float SpeedUpPower = 2;
-  public float KillPower = 2;
-  public float DoublePower = 2;
+  public int KillPower = 2;
+  public int DoublePower = 2;
   
   public float SpeedUpDuration = 10;
   public float KillDuration = 10;
@@ -98,7 +98,7 @@ public class BonusCollector : MonoBehaviour
   
   private IEnumerator StartKillBonus()
   {
-    KillBonus = 2;
+    KillBonus = KillPower;
 
     ActivateEffect(KillEffect, true);
     yield return new WaitForSeconds(KillDuration);
@@ -115,7 +115,7 @@ public class BonusCollector : MonoBehaviour
   
   private IEnumerator StartDoubleBonus()
   {
-    DoubleBonus = 2;
+    DoubleBonus = DoublePower;
 
     ActivateEffect(DoubleBonusEffect, true);
     yield return new WaitForSeconds(DoubleDuration);

@@ -163,9 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5f5c905b83454a995fb9f6afab76e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedUpPower: 8
+  SpeedUpPower: 6
   KillPower: 4
-  DoublePower: 40
+  DoublePower: 4
   SpeedUpDuration: 12
   KillDuration: 15
   DoubleDuration: 15
