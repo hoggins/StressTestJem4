@@ -9,9 +9,9 @@ namespace BotStates
     
     public BotStateWander(BallBotControl control) : base(control)
     {
-      StateDuration = 10f;
+      StateDuration = 3f;
       StateDurationRandom = 5f;
-      ChanceToSelect = 0.5f;
+      ChanceToSelect = 0.3f;
     }
 
     public override void OnEnter()

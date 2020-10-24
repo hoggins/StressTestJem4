@@ -9,7 +9,7 @@ namespace BotStates
     {
       StateDuration = 10f;
       StateDurationRandom = 5f;
-      ChanceToSelect = 0.35f;
+      ChanceToSelect = 0.40f;
     }
 
     public override void Update()

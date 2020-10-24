@@ -5,13 +5,13 @@
     public BotStateCollect(BallBotControl control) : base(control)
     {
       StateDuration = 5f;
-      StateDurationRandom = 10;
+      StateDurationRandom = 6f;
       ChanceToSelect = 0.8f;
     }
     
     public override void Update()
     {
-      var closest = CatControl.GetClosest(Control.Rigidbody.position);
+      var closest = CatControl.GetClosestNearPlayer(Control.Rigidbody.position);
       if (closest == null)
       {
         Finish = true;

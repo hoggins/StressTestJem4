@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public class CatControl : MonoBehaviour
 {
   public static readonly HashSet<CatControl> AliveCats = new HashSet<CatControl>();
+  
   [NonSerialized]
   public Collider Collider;
   [NonSerialized]
@@ -102,6 +103,24 @@ public class CatControl : MonoBehaviour
     _currentState.OnEnter();
   }
 
+
+  public static CatControl GetClosestNearPlayer(Vector3 position)
+  {
+    var minDist = float.MaxValue;
+    CatControl resultCat = null;
+
+    foreach (var cat in GameManager.AliveNearPlayer)
+    {
+      var d = Vector3.Distance(position, cat.transform.position);
+      if (minDist > d)
+      {
+        resultCat = cat;
+        minDist = d;
+      }
+    }
+
+    return resultCat == null ? GetClosest(position) : resultCat;
+  }
   public static CatControl GetClosest(Vector3 position)
   {
     var minDist = float.MaxValue;

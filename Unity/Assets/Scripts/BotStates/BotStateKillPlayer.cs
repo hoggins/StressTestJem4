@@ -11,8 +11,8 @@ namespace BotStates
     public BotStateKillPlayer(BallBotControl control) : base(control)
     {
       StateDuration = 7f;
-      StateDurationRandom = 3f;
-      ChanceToSelect = 0.35f;
+      StateDurationRandom = 4f;
+      ChanceToSelect = 0.40f;
     }
 
     public override void OnEnter()
@@ -31,6 +31,12 @@ namespace BotStates
       
       Debug.DrawLine(Control.transform.position, targetPlayerPosition, Color.red, 0f, false);
       Move = -(Control.Rigidbody.position - targetPlayerPosition).normalized;
+
+
+      if (Vector3.Distance(targetPlayerPosition, Control.transform.position) < 15f)
+      {
+        Control.GetComponent<BallSpeedUp>().Use(Move);
+      }
     }
 
     public override bool CanSelect()
