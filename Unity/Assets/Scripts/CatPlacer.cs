@@ -90,7 +90,7 @@ public class CatPlacer : MonoBehaviour
     if (!silent && _audio != null)
     {
       _audio.LastHitEnemyTime = Time.time;
-      AudioController.Instance.PlayPickCat(_audio.Source);
+      AudioController.Instance.PlayPickCat(_audio.DefaultSource);
     }
 
     var freeLevel = _freePointsByLevel.FirstOrDefault(x => x.Count > 0);

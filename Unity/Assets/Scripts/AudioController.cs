@@ -12,8 +12,8 @@ namespace Controllers
     public AudioClip[] PickCat;
     public AudioClip[] HitWall;
 
-    public AudioSource Player;
-    public AudioSource PlayerRails;
+    // public AudioSource Player;
+    // public AudioSource PlayerRails;
     public AudioSource Music;
     public AudioSource MusicMenu;
 

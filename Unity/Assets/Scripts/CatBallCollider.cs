@@ -80,7 +80,7 @@ namespace DefaultNamespace
       if (_audio != null)
       {
         _audio.LastHitEnemyTime = Time.time;
-        AudioController.Instance.PlayHitEnemy(_audio.Source);
+        AudioController.Instance.PlayHitEnemy(_audio.DefaultSource);
       }
 
       if (toDetach == 0)

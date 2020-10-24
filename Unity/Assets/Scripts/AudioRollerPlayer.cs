@@ -10,17 +10,19 @@ namespace DefaultNamespace
     public float minRollSpeed = 0.4f;
     public float maxRollSpeed = 8;
 
+    public AudioSource DefaultSource;
+    public AudioSource RailsSource;
+
     private bool IsPlayingRails;
     private Rigidbody _body;
 
     private Vector3 _lastVel;
-    public AudioSource Source { get; set; }
 
-    public float LastHitEnemyTime;
+
+    public float LastHitEnemyTime { get; set; }
 
     private void Awake()
     {
-      Source = GetComponent<AudioSource>();
       _body = GetComponent<Rigidbody>();
     }
 
@@ -39,7 +41,7 @@ namespace DefaultNamespace
       if ((_lastVel - newVel).magnitude > 2
           && timeSinceEnemyHit > 0.3)
       {
-        AudioController.Instance.PlayHitWall(Source);
+        AudioController.Instance.PlayHitWall(DefaultSource);
         LastHitEnemyTime = Time.time;
       }
       _lastVel = newVel;
@@ -48,7 +50,7 @@ namespace DefaultNamespace
     private void UpdateRails()
     {
       var moveMagnitude = _body.velocity.magnitude;
-      var rails = AudioController.Instance.PlayerRails;
+      var rails = RailsSource;
       if (moveMagnitude > minRollSpeed && !IsPlayingRails)
       {
         IsPlayingRails = true;
