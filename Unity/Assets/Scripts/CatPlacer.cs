@@ -12,8 +12,6 @@ public class CatPlacer : MonoBehaviour
   public int Level => _freePointsByLevel.Count;
   public int CatsAttached => _busyPointsByLevel.Sum(x => x.Count);
 
-  public GameObject DefaultCat;
-
   public float[] SizeByLevel = new[]
   {
     0.62f,
@@ -43,7 +41,7 @@ public class CatPlacer : MonoBehaviour
 
     for (int i = 0; i < 3; i++)
     {
-      AttachCat(Instantiate(DefaultCat));
+      AttachCat(CatFactory.Instance.MakeCat());
     }
     StartCoroutine(Fade());
   }
@@ -52,8 +50,7 @@ public class CatPlacer : MonoBehaviour
   {
     while (true)
     {
-      var go = Instantiate(DefaultCat);
-      AttachCat(go);
+      AttachCat(CatFactory.Instance.MakeCat());
       yield return new WaitForSeconds(1f);
     }
   }
@@ -119,8 +116,41 @@ public class CatPlacer : MonoBehaviour
   {
     while (_freePointsByLevel.Count <= layer || _freePointsByLevel.Last().Count > 0)
     {
-      var go = Instantiate(DefaultCat);
+      var go = Instantiate(CatFactory.Instance.MakeCat());
       AttachCat(go);
     }
+  }
+
+  public List<GameObject> DrainCats(Vector3 point)
+  {
+    var toRemove = _busyPointsByLevel
+      .SelectMany(x => x)
+      .OrderBy(x => Vector3.Distance(x.transform.position, point))
+      .Take(3)
+      .ToList();
+    for (var busyLayerIdx = 0; busyLayerIdx < _busyPointsByLevel.Count; busyLayerIdx++)
+    {
+      var busyLayer = _busyPointsByLevel[busyLayerIdx];
+      foreach (var cat in toRemove)
+      {
+        if (!busyLayer.Remove(cat))
+          continue;
+        _freePointsByLevel[busyLayerIdx].Add(cat.transform.localPosition);
+      }
+
+      if (busyLayer.Count == 0)
+      {
+        _busyPointsByLevel.RemoveAt(busyLayerIdx);
+        _freePointsByLevel.RemoveAt(busyLayerIdx);
+        Debug.Log("downshift");
+      }
+      else
+      {
+        Debug.Log($"pending for downshift {busyLayer.Count}");
+      }
+
+    }
+
+    return toRemove;
   }
 }
