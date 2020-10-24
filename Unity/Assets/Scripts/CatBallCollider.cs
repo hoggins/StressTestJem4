@@ -7,6 +7,8 @@ namespace DefaultNamespace
   [RequireComponent(typeof(CatPlacer))]
   public class CatBallCollider : MonoBehaviour
   {
+    private const float InactiveTime = 1f;
+
     private CatPlacer _placer;
 
     private LinkedList<FlyingCat> _flyingQueue = new LinkedList<FlyingCat>();
@@ -48,11 +50,32 @@ namespace DefaultNamespace
       if (!collision.gameObject.CompareTag("Bot") && !collision.gameObject.CompareTag("Player"))
         return;
 
+      var force = collision.impulse.magnitude;
+
+      if (force < 1)
+        return;
+
+      var totalCount = _placer.CatsAttached;
+      int toDetach = 0;
+      if (force >= 10)
+        toDetach = Math.Max(6, (int) (totalCount * 0.3f));
+      else if (force >= 5)
+        toDetach = Math.Max(3, (int) (totalCount * 0.3f));
+      else if (force >= 3)
+        toDetach = Math.Max(3, (int) (totalCount * 0.2f));
+      else if (force >= 1)
+        toDetach = Math.Max(1, (int) (totalCount * 0.1f));
+
+Debug.Log($"force {force} total {totalCount} res {toDetach}");
+
+      if (toDetach == 0)
+        return;
 
       var contact = collision.GetContact(0);
 
-      var cats = _placer.DrainCats(contact.point, 3);
+      var cats = _placer.DrainCats(contact.point, toDetach);
 
+      var selfPos = gameObject.transform.position;
       foreach (var cat in cats)
       {
         cat.name = "killed";
@@ -61,10 +84,14 @@ namespace DefaultNamespace
 
         cat.transform.SetParent(null, true);
 
-        var body = cat.GetComponent<Rigidbody>();
-        body.velocity = Vector3.up*5;
+        if (Vector3.Distance(cat.transform.position, selfPos) < 6)
+        {
+          var body = cat.GetComponent<Rigidbody>();
+          body.velocity = contact.normal * 7;
+//          body.velocity = (cat.transform.position- selfPos).normalized * 7;
+        }
 
-        _flyingQueue.AddLast(new FlyingCat(Time.time + 4f, cat));
+        _flyingQueue.AddLast(new FlyingCat(Time.time + InactiveTime, cat));
       }
 
     }

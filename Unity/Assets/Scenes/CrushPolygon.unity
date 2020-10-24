@@ -456,18 +456,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 31f9be06cd86b49fba3df85d8caae09b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fefaeeb78b19c486190e186560fbe810, type: 3}
---- !u!1 &481628713 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 347781762513960051, guid: fefaeeb78b19c486190e186560fbe810,
-    type: 3}
-  m_PrefabInstance: {fileID: 481628712}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &481628714 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4090873960680957401, guid: fefaeeb78b19c486190e186560fbe810,
-    type: 3}
-  m_PrefabInstance: {fileID: 481628712}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &481628715 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7821371004689279421, guid: fefaeeb78b19c486190e186560fbe810,
@@ -480,34 +468,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 481628712}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &481628717
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 481628713}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3943870957529831248, guid: fefaeeb78b19c486190e186560fbe810, type: 3}
---- !u!64 &481628718
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 481628714}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5262205229939629691, guid: fefaeeb78b19c486190e186560fbe810, type: 3}
 --- !u!64 &481628719
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -671,6 +631,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555835409934, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_MovePower
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7801166079899463476, guid: daabf9ec4043bd441bfc66c817cb6165,
         type: 3}

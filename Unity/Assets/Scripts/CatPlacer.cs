@@ -163,7 +163,8 @@ public class CatPlacer : MonoBehaviour
     if (catsAttached <= minCount)
       return new List<GameObject>();
 
-    countToTake = Math.Min(minCount, catsAttached - countToTake);
+    if (countToTake > catsAttached - minCount)
+      countToTake = catsAttached - minCount;
 
     // return DrainFromContact();
 
