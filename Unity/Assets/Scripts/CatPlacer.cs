@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Controllers;
+using DefaultNamespace;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
@@ -35,11 +37,13 @@ public class CatPlacer : MonoBehaviour
   private Dictionary<GameObject, Vector3> _targetPoints = new Dictionary<GameObject, Vector3>();
 
   private Dictionary<GameObject, Coroutine> _attachingCatsCoroutines = new Dictionary<GameObject, Coroutine>();
+  private AudioRollerPlayer _audio;
 
 
   private void Awake()
   {
     Collider = GetComponent<SphereCollider>();
+    _audio = GetComponent<AudioRollerPlayer>();
   }
 
   void Start()
@@ -50,11 +54,11 @@ public class CatPlacer : MonoBehaviour
     {
       var makeCat = CatFactory.Instance.MakeCat();
       makeCat.transform.position = transform.position;
-      AttachCat(makeCat);
+      AttachCat(makeCat, true);
     }
 
     if (AttachTest)
-    StartCoroutine(Fade());
+      StartCoroutine(Fade());
   }
 
   private void OnCollisionEnter(Collision other)
@@ -63,7 +67,7 @@ public class CatPlacer : MonoBehaviour
     {
       var count = GetComponent<BonusCollector>().DoubleBonus;
       AttachCat(other.gameObject);
-      
+
       for (int i = 1; i < count; i++)
       {
         AttachCat(Instantiate(other.gameObject));
@@ -82,8 +86,11 @@ public class CatPlacer : MonoBehaviour
     }
   }
 
-  public void AttachCat(GameObject catGo)
+  public void AttachCat(GameObject catGo, bool silent = false)
   {
+    if (!silent && _audio != null)
+      AudioController.Instance.PlayPickCat(_audio.Source);
+
     AttachedCatsCount++;
 
     var freeLevel = _freePointsByLevel.FirstOrDefault(x => x.Count > 0);

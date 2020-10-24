@@ -1,30 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6468662433926410479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5603051555829351406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa7e0829bc72c94babd728cc0466196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-4881591681880764855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5603051555829351406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d91458a775d8464b93eac3ef8c0c3830, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
 --- !u!82 &6159916634443124380
 AudioSource:
   m_ObjectHideFlags: 0
@@ -121,6 +96,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6468662433926410479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603051555829351406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa7e0829bc72c94babd728cc0466196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4881591681880764855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603051555829351406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91458a775d8464b93eac3ef8c0c3830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rigidbody: {fileID: 0}
 --- !u!114 &897470888255924191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdb186edcb449b8a60527962327edd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minRollSpeed: 0.4
+  maxRollSpeed: 12
 --- !u!1001 &5603051555829384526
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,9 +9,11 @@ namespace Controllers
   public class AudioController : MonoBehaviour
   {
     public AudioClip[] HitEnemy;
+    public AudioClip[] PickCat;
     public AudioClip[] RandomPhrases;
 
     public AudioSource Player;
+    public AudioSource PlayerRails;
     public AudioSource Music;
     public AudioSource MusicMenu;
 
@@ -32,6 +34,11 @@ namespace Controllers
     public void PlayHitEnemy(AudioSource audioSource)
     {
       PlayRandom(audioSource, HitEnemy);
+    }
+
+    public void PlayPickCat(AudioSource audioSource)
+    {
+      PlayRandom(audioSource, PickCat);
     }
 
 
