@@ -70,13 +70,13 @@ namespace DefaultNamespace
         toDetach = Math.Max(1, (int) (totalCount * 0.1f));
 
       toDetach *= collision.gameObject.GetComponent<BonusCollector>().KillBonus;
-      
+
       var ballSpeedUp = collision.gameObject.GetComponent<BallSpeedUp>();
       toDetach *= ballSpeedUp.IsDashing ? ballSpeedUp.KillBonus : 1;
 
       if (GetComponent<BallSpeedUp>().IsDashing)
         toDetach = 0;
-      
+
       if (_audio != null)
       {
         _audio.LastHitEnemyTime = Time.time;

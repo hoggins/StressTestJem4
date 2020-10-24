@@ -5,13 +5,11 @@ using UnityEngine.Video;
 
 public class StartUiController : MonoBehaviour
 {
-  private const string GameScene = "Scenes/RollEnvironment01";
   public VideoPlayer Player;
-
 
   public void OnPlayClick()
   {
-    var op = SceneManager.LoadSceneAsync(GameScene, LoadSceneMode.Single);
+    var op = SceneManager.LoadSceneAsync(UnityContract.SceneGame, LoadSceneMode.Single);
     op.allowSceneActivation = false;
 
     Player.targetCamera = Camera.main;
