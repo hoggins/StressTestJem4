@@ -44,16 +44,13 @@ public class CatPlacer : MonoBehaviour
   {
     _pointProvider = GameObject.Find("App").GetComponent<CatPointProvider>();
 
+    for (int i = 0; i < 3; i++)
+    {
+      AttachCat(Instantiate(DefaultCat), Vector3.zero);
+    }
 
     if (AttachTest)
-    {
-      for (int i = 0; i < 3; i++)
-      {
-        AttachCat(Instantiate(DefaultCat), Vector3.zero);
-      }
-
       StartCoroutine(Fade());
-    }
   }
 
   private void OnCollisionEnter(Collision other)
