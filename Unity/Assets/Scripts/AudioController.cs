@@ -29,6 +29,8 @@ namespace Controllers
 
       Instance = this;
       DontDestroyOnLoad(this);
+
+      PlayMusic();
     }
 
     public void PlayHitEnemy(AudioSource audioSource)
@@ -53,7 +55,7 @@ namespace Controllers
       if (_musicCoroutine != null)
         StopCoroutine(_musicCoroutine);
 
-      _musicCoroutine = StartCoroutine(ChangeVolumeTo(Music, 1f, 3f));
+      _musicCoroutine = StartCoroutine(ChangeVolumeTo(Music, 0.10f, 3f));
     }
 
     public void StopMusic()

@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minRollSpeed: 0.4
-  maxRollSpeed: 12
+  maxRollSpeed: 8
 --- !u!1001 &5603051555829384526
 PrefabInstance:
   m_ObjectHideFlags: 0
