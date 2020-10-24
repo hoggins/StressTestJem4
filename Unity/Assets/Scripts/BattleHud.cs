@@ -19,7 +19,7 @@ namespace DefaultNamespace
     private void Update()
     {
       var catPlacer = Player.Instance.GetComponent<CatPlacer>();
-      CatScoreText.text = catPlacer.CatsAttached.ToString() + " x";
+      CatScoreText.text = catPlacer.CatsAttached.ToString() + " / 30";
       
       var ballSpeedUp = Player.Instance.GetComponent<BallSpeedUp>();
       DashCooldown.fillAmount = ballSpeedUp.Fill;

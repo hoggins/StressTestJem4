@@ -6,7 +6,7 @@ public class BallSpeedUp : MonoBehaviour
   public bool IsDashing => _dashingElased > 0;
   public int KillBonus = 4;
 
-  public float Fill => _dashCooldown / 8f;
+  public float Fill => 1f - _dashCooldown / 8f;
   private float _dashingElased;
   private float _dashCooldown;
   
