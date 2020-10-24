@@ -32,6 +32,8 @@ public class CatPlacer : MonoBehaviour
   private List<List<GameObject>> _busyPointsByLevel = new List<List<GameObject>>();
   private CatPointProvider _pointProvider;
 
+  private Dictionary<GameObject, Vector3> _targetPoints = new Dictionary<GameObject, Vector3>();
+
   private Dictionary<GameObject, Coroutine> _attachingCatsCoroutines = new Dictionary<GameObject, Coroutine>();
 
 
@@ -91,6 +93,7 @@ public class CatPlacer : MonoBehaviour
     catGo.GetComponent<CatControl>().PrepareToBePart();
     catGo.transform.SetParent(transform, true);
 
+    _targetPoints[catGo] = point;
     _attachingCatsCoroutines.Add(catGo, StartCoroutine(AttachCoroutine(catGo, point)));
 
     _busyPointsByLevel[_busyPointsByLevel.Count-1].Add(catGo);
@@ -198,7 +201,8 @@ public class CatPlacer : MonoBehaviour
           handled.Add(cat);
           layer.RemoveAt(layer.Count - 1);
 
-          _freePointsByLevel[i].Add(cat.transform.position);
+          RemoveCat(i, cat);
+
           if (layer.Count == 0)
           {
             _busyPointsByLevel.RemoveAt(i);
@@ -234,7 +238,9 @@ public class CatPlacer : MonoBehaviour
         {
           if (!busyLayer.Remove(cat))
             continue;
-          _freePointsByLevel[busyLayerIdx].Add(cat.transform.localPosition);
+
+          RemoveCat(busyLayerIdx, cat);
+
           handled.Add(cat);
         }
 
@@ -252,6 +258,18 @@ public class CatPlacer : MonoBehaviour
       }
 
       return handled;
+    }
+  }
+
+  private void RemoveCat(int layerIdx, GameObject cat)
+  {
+    _freePointsByLevel[layerIdx].Add(_targetPoints[cat]);
+    _targetPoints.Remove(cat);
+
+    if (_attachingCatsCoroutines.ContainsKey(cat))
+    {
+      StopCoroutine(_attachingCatsCoroutines[cat]);
+      _attachingCatsCoroutines.Remove(cat);
     }
   }
 }

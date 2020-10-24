@@ -48,10 +48,6 @@ namespace DefaultNamespace
       if (!collision.gameObject.CompareTag("Bot") && !collision.gameObject.CompareTag("Player"))
         return;
 
-      foreach (var cc in collision.contacts)
-      {
-        Debug.DrawRay(cc.point, cc.normal, Color.white, 3);
-      }
 
       var contact = collision.GetContact(0);
 
@@ -61,16 +57,14 @@ namespace DefaultNamespace
       {
         cat.name = "killed";
 
-        var vector = cat.transform.localPosition;
-
-        cat.transform.SetParent(null, true);
-        var body = cat.GetComponent<Rigidbody>();
-
         cat.GetComponent<CatControl>().PrepareToBeFly();
 
-        body.AddForce(Vector3.up);
+        cat.transform.SetParent(null, true);
 
-        _flyingQueue.AddLast(new FlyingCat(Time.time + 1f, cat));
+        var body = cat.GetComponent<Rigidbody>();
+        body.velocity = Vector3.up*5;
+
+        _flyingQueue.AddLast(new FlyingCat(Time.time + 4f, cat));
       }
 
     }
