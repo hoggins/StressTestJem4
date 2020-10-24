@@ -31,6 +31,8 @@ public class CatPlacer : MonoBehaviour
   private List<List<Vector3>> _freePointsByLevel = new List<List<Vector3>>();
   private List<List<GameObject>> _busyPointsByLevel = new List<List<GameObject>>();
   private CatPointProvider _pointProvider;
+  
+  private Dictionary<GameObject, Coroutine> _attachingCatsCoroutines = new Dictionary<GameObject, Coroutine>();
 
 
   private void Awake()
@@ -44,7 +46,9 @@ public class CatPlacer : MonoBehaviour
 
     for (int i = 0; i < 3; i++)
     {
-      AttachCat(CatFactory.Instance.MakeCat(), Vector3.zero);
+      var makeCat = CatFactory.Instance.MakeCat();
+      makeCat.transform.position = transform.position;
+      AttachCat(makeCat);
     }
 
     if (AttachTest)
@@ -55,7 +59,7 @@ public class CatPlacer : MonoBehaviour
   {
     if (other.gameObject.CompareTag("Cat"))
     {
-      AttachCat(other.gameObject, other.GetContact(0).point);
+      AttachCat(other.gameObject);
     }
   }
 
@@ -64,12 +68,12 @@ public class CatPlacer : MonoBehaviour
     while (true)
     {
       var go =CatFactory.Instance.MakeCat();
-      AttachCat(go, Vector3.zero);
+      AttachCat(go);
       yield return new WaitForSeconds(1f);
     }
   }
 
-  public void AttachCat(GameObject catGo, Vector3 hitPosition)
+  public void AttachCat(GameObject catGo)
   {
     AttachedCatsCount++;
 
@@ -85,12 +89,55 @@ public class CatPlacer : MonoBehaviour
 
     catGo.GetComponent<CatControl>().PrepareToBePart();
     catGo.transform.SetParent(transform, true);
-    catGo.transform.localPosition = point /*+ (Random.insideUnitSphere * 0.1f)*/;
-    catGo.transform.localRotation = Random.rotation;
 
+    _attachingCatsCoroutines.Add(catGo, StartCoroutine(AttachCoroutine(catGo, point)));
+    
     _busyPointsByLevel[_busyPointsByLevel.Count-1].Add(catGo);
 
     UpdateStats();
+  }
+
+  private IEnumerator AttachCoroutine(GameObject catGo, Vector3 targetPoint)
+  {
+    var startPoint = catGo.transform.localPosition;
+    var elapsed = 0f;
+    const float duration = 1f;
+
+    // var center = transform.position;
+    // var startForward = Quaternion.LookRotation((center - catGo.transform.position).normalized, Vector3.up);
+    //
+    // var targetWorld = transform.TransformPoint(targetPoint);
+    // var endForward = Quaternion.LookRotation((center - targetWorld).normalized, Vector3.up);
+    //
+    // var distanceToTarget = Vector3.Distance(center, targetWorld);
+    // var distanceToStart = Vector3.Distance(center, catGo.transform.position);
+    //
+    //
+    //
+    //
+    // var realStart = catGo.transform.localPosition;
+    //   var posStart = startForward * Vector3.forward * distanceToStart;
+    //   var posEnd = endForward * Vector3.forward * distanceToTarget;
+    
+    // Debug.Log($"start {catGo.transform.localPosition} {posStart}");
+    
+    var currentCatRotation = catGo.transform.localRotation;
+    var targetCatRotation = Random.rotation;
+    do
+    {
+      elapsed += Time.deltaTime;
+      
+      var t = elapsed / duration;
+      
+      // var currentRotation = Quaternion.Slerp(startForward, endForward, t);
+      // catGo.transform.localPosition = currentRotation * Vector3.forward * Mathf.Lerp(distanceToStart, distanceToTarget, t);
+      catGo.transform.localPosition = Vector3.Lerp(startPoint, targetPoint, t);
+      catGo.transform.localRotation = Quaternion.Lerp(currentCatRotation, targetCatRotation, t);
+      
+      yield return null;
+    } while (elapsed < duration);
+
+    _attachingCatsCoroutines.Remove(catGo);
   }
 
   private void UpdateStats()
@@ -133,7 +180,7 @@ public class CatPlacer : MonoBehaviour
     while (_freePointsByLevel.Count <= layer || _freePointsByLevel.Last().Count > 0)
     {
       var go = CatFactory.Instance.MakeCat();
-      AttachCat(go, Vector3.zero);
+      AttachCat(go);
     }
   }
 
