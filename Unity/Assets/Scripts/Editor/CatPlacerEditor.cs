@@ -13,17 +13,9 @@ public class CatPlacerEditor : Editor
     if (newLevel != placer.Level)
     {
       if (newLevel < placer.Level)
-      {
-        for (int i = placer.Level-1; i >= newLevel; i--)
-        {
-          placer.RemoveLayer(i);
-        }
-      }
+        placer.RemoveLayer(newLevel);
       else
-        for (int i = placer.Level; i < newLevel; i++)
-        {
-          placer.AddLayer(i);
-        }
+        placer.AddLayer(newLevel);
     }
 
     //StartCoroutine(Fade());

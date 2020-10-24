@@ -42,7 +42,7 @@ public class CatPlacer : MonoBehaviour
   {
     _pointProvider = GameObject.Find("App").GetComponent<CatPointProvider>();
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 6; i++)
     {
       AttachCat(CatFactory.Instance.MakeCat(), Vector3.zero);
     }
@@ -97,40 +97,28 @@ public class CatPlacer : MonoBehaviour
   {
     if (_busyPointsByLevel.Count == 0)
       Collider.radius = 0.1f;
+    else if (_busyPointsByLevel.Count > SizeByLevel.Length)
+      Collider.radius = SizeByLevel[SizeByLevel.Length-1];
     else
       Collider.radius = SizeByLevel[_busyPointsByLevel.Count-1];
   }
 
   public void RemoveLayer(int layer)
   {
-    if (_busyPointsByLevel.Count == 0 && layer == 0)
-      return;
-
-    if (layer >= _busyPointsByLevel.Count || layer < 0)
+    layer = Math.Min(layer, 1);
+    while (layer < _busyPointsByLevel.Count)
     {
-      Debug.LogWarning($"cant remove layer {layer} of total {_busyPointsByLevel.Count}");
-      return;
+      var cats = DrainCats(Vector3.zero, 1);
+      foreach (var cat in cats)
+      {
+        Destroy(cat);
+      }
     }
-
-    foreach (var o in _busyPointsByLevel[layer])
-    {
-      Destroy(o);
-    }
-
-    _busyPointsByLevel[layer].Clear();
-    var lastIdx = _busyPointsByLevel.Count-1;
-    if (layer == lastIdx)
-    {
-      _busyPointsByLevel.RemoveAt(lastIdx);
-      _freePointsByLevel.RemoveAt(lastIdx);
-    }
-
-    UpdateStats();
   }
 
   public void AddLayer(int layer)
   {
-    while (_freePointsByLevel.Count <= layer || _freePointsByLevel.Last().Count > 0)
+    while (_freePointsByLevel.Count < layer || _freePointsByLevel.Last().Count > 0)
     {
       var go = CatFactory.Instance.MakeCat();
       AttachCat(go, Vector3.zero);
@@ -156,21 +144,28 @@ public class CatPlacer : MonoBehaviour
       for (var i = _busyPointsByLevel.Count - 1; i >= 0; i--)
       {
         var layer = _busyPointsByLevel[i];
-        var cat = layer[layer.Count-1];
-        handled.Add(cat);
-        layer.RemoveAt(layer.Count - 1);
-
-        _freePointsByLevel[i].Add(cat.transform.position);
-
-        if (layer.Count == 0)
+        while (true)
         {
-          _busyPointsByLevel.RemoveAt(i);
-          _freePointsByLevel.RemoveAt(i);
-          UpdateStats();
+          var cat = layer[layer.Count-1];
+          handled.Add(cat);
+          layer.RemoveAt(layer.Count - 1);
+
+          _freePointsByLevel[i].Add(cat.transform.position);
+          if (layer.Count == 0)
+          {
+            _busyPointsByLevel.RemoveAt(i);
+            _freePointsByLevel.RemoveAt(i);
+            UpdateStats();
+            break;
+          }
+
+          if (handled.Count == countToTake)
+            return handled;
         }
 
         if (handled.Count == countToTake)
           return handled;
+
       }
 
       return handled;
