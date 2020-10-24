@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38b8b3544ee463e929c47bec044c320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeBetweenMinJumps: 0.5
-  TimeBetweenMaxJumps: 2.5
+  TimeBetweenMinJumps: 2
+  TimeBetweenMaxJumps: 10
   ChanceToJump: 0.25
   Jump: 0
 --- !u!195 &5822840287064946948

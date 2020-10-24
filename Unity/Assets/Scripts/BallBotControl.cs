@@ -43,6 +43,7 @@ public class BallBotControl : MonoBehaviour
 
   private float _stateTimeLeft;
   private float _jumpTimeLeft;
+  private float _pressJumpTimer = 0;
 
   private void Awake()
   {
@@ -76,28 +77,6 @@ public class BallBotControl : MonoBehaviour
   {
     _currentState.Update();
 
-    UpdateJump();
-  }
-
-  private void UpdateJump()
-  {
-    Jump = false;
-    _jumpTimeLeft -= Time.deltaTime;
-
-    if (_jumpTimeLeft <= 0)
-    {
-      if (Random.Range(0, 1f) < ChanceToJump)
-      {
-        Jump = true;
-      }
-
-      ResetJumpTimer();
-    }
-  }
-
-  private void ResetJumpTimer()
-  {
-    _jumpTimeLeft = Random.Range(TimeBetweenMinJumps, TimeBetweenMaxJumps);
   }
 
   private void LateUpdate()
@@ -138,9 +117,37 @@ public class BallBotControl : MonoBehaviour
 
   private void FixedUpdate()
   {
+    UpdateJump();
     _currentState.FixedUpdate();
     // Call the Move function of the ball controller
     UpdateStuckCheat();
+  }
+
+  private void UpdateJump()
+  {
+    Jump = false;
+    _jumpTimeLeft -= Time.fixedDeltaTime;
+
+    if (_jumpTimeLeft <= 0)
+    {
+      if (Random.Range(0, 1f) < ChanceToJump)
+      {
+        _pressJumpTimer = Random.Range(0.1f, 0.5f);
+      }
+
+      ResetJumpTimer();
+    }
+
+    _pressJumpTimer -= Time.fixedDeltaTime;
+    if (_pressJumpTimer > 0)
+    {
+      Jump = true;
+    }
+  }
+
+  private void ResetJumpTimer()
+  {
+    _jumpTimeLeft = Random.Range(TimeBetweenMinJumps, TimeBetweenMaxJumps);
   }
 
   private void UpdateStuckCheat()
