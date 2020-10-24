@@ -32,7 +32,7 @@ namespace UnityStandardAssets.Vehicles.Ball
         public void Move(Vector3 moveDirection, bool jump)
         {
           var power = PowerCurveBySize.Evaluate(_collider.radius);
-          var powerWithBonus = (power + m_MovePowerBonus) * m_bonusMult * m_MoveRunBonus;
+          var powerWithBonus = (power + m_MovePowerBonus) * m_bonusMult;
             // If using torque to rotate the ball...
             if (m_UseTorque)
             {
@@ -44,6 +44,9 @@ namespace UnityStandardAssets.Vehicles.Ball
                 // Otherwise add force in the move direction.
                 m_Rigidbody.AddForce(moveDirection*powerWithBonus);
             }
+            
+            if(m_MoveRunBonus > 1)
+                m_Rigidbody.AddForce(moveDirection*m_MoveRunBonus);
 
             // If on the ground and jump is pressed...
             if (Physics.Raycast(transform.position, -Vector3.up, k_GroundRayLength) && jump)

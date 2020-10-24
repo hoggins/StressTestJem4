@@ -1,64 +1,37 @@
-﻿using System;
-using UnityEngine;
-using UnityStandardAssets.Vehicles.Ball;
+﻿using UnityEngine;
 
 public class BallSpeedUp : MonoBehaviour
 {
-  public bool Speeding { get; }
-  public bool TryingToSpeed { get; private set; }
-  public float SpeedPercent => _speedBudget / SpeedDuration;
 
-  public bool Cooldown => _cooldown;
+  public bool IsDashing => _dashingElased > 0;
+  public int KillBonus = 4;
 
-  public float SpeedDuration = 2.0f;
-  public float SpeedCooldown = 2.0f;
-  public float SpeedMult = 2.0f;
-  public float TorgueBonus = 3.0f;
-
-  private bool _cooldown;
-  private float _speedBudget;
-  private Ball _ball;
+  private float _dashingElased;
+  private float _dashCooldown;
+  
+  private Rigidbody _rigidbody;
 
   void Awake()
   {
-    _ball = GetComponent<Ball>();
+    _rigidbody = GetComponent<Rigidbody>();
   }
-  public void Use()
+  public void Use(Vector3 forward)
   {
-    TryingToSpeed = true;
-  }
+    if (_dashCooldown < 0)
+    {
+      forward.y = 0;
+      forward.Normalize();
 
-  public void Stop()
-  {
-    TryingToSpeed = false;
+      _rigidbody.velocity = new Vector3();
+      _rigidbody.AddForce(forward * 1300);
+      _dashCooldown = 8;
+      _dashingElased = 1f;
+    }
   }
 
   private void Update()
   {
-    _ball.m_MoveRunBonus = 1f;
-    _ball.m_TorgueBonus = 1f;
-    
-    if (TryingToSpeed && !_cooldown)
-    {
-        _speedBudget -= Time.deltaTime;
-        if (_speedBudget > 0)
-        {
-          _ball.m_MoveRunBonus = SpeedMult;
-          _ball.m_TorgueBonus = TorgueBonus;
-        }
-        else
-        {
-          _cooldown = true;
-        }
-    }
-    else
-    {
-      _speedBudget += Time.deltaTime*(SpeedDuration/SpeedCooldown);
-      if (_speedBudget > SpeedDuration)
-      {
-        _speedBudget = SpeedDuration;
-        _cooldown = false;
-      }
-    }
+    _dashCooldown -= Time.deltaTime;
+    _dashingElased -= Time.deltaTime;
   }
 }

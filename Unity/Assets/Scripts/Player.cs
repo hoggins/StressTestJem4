@@ -12,6 +12,9 @@ public class Player:MonoBehaviour
   public Rigidbody Rigidbody;
   [NonSerialized]
   public BallSpeedUp SpeedUp;
+
+  
+  
   
   void Awake()
   {
@@ -23,13 +26,11 @@ public class Player:MonoBehaviour
 
   private void Update()
   {
+    
     if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
     {
-      SpeedUp.Use();
-    }
-    else
-    {
-      SpeedUp.Stop();
+      var forward = CameraMain.Instance.transform.forward;
+      SpeedUp.Use(forward);
     }
 
     var speed = Rigidbody.velocity.magnitude;

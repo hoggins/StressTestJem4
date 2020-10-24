@@ -118,6 +118,7 @@ MonoBehaviour:
   m_bonusMult: 1
   m_MovePowerBonus: 0
   m_MoveRunBonus: 0
+  m_TorgueBonus: 1
   m_UseTorque: 1
   m_MaxAngularVelocity: 25
   m_JumpPower: 4
@@ -188,7 +189,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeedDuration: 1.5
   SpeedCooldown: 8
-  SpeedMult: 20
+  SpeedMult: 22
+  TorgueBonus: 4
+  KillBonus: 4
 --- !u!1 &4392023663900246565
 GameObject:
   m_ObjectHideFlags: 0
