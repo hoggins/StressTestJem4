@@ -63,15 +63,16 @@ namespace DefaultNamespace
           if (viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1 &&
               viewportPoint.z > 0)
           {
-            Debug.DrawLine(hit.position, hit.position + Vector3.up * 30, Color.green, 5.0f, false);
-            targetPosition = hit.position;
-            break;
-          }
-          else
-          {
             Debug.DrawLine(hit.position, hit.position + Vector3.up * 20, Color.black, 5.0f, false);
             retries--;
             continue;
+          }
+          else
+          {
+            
+            Debug.DrawLine(hit.position, hit.position + Vector3.up * 30, Color.green, 5.0f, false);
+            targetPosition = hit.position;
+            break;
           }
         }
 
