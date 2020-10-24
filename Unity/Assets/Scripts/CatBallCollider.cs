@@ -73,9 +73,10 @@ namespace DefaultNamespace
       
       var ballSpeedUp = collision.gameObject.GetComponent<BallSpeedUp>();
       toDetach *= ballSpeedUp.IsDashing ? ballSpeedUp.KillBonus : 1;
-      
-      Debug.Log($"force {force} total {totalCount} res {toDetach}");
 
+      if (GetComponent<BallSpeedUp>().IsDashing)
+        toDetach = 0;
+      
       if (_audio != null)
       {
         _audio.LastHitEnemyTime = Time.time;
