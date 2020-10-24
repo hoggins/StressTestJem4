@@ -29,7 +29,7 @@ public class GameManager:MonoBehaviour
     AliveNearPlayer.Clear();
     foreach (var aliveCat in CatControl.AliveCats)
     {
-      if (Vector3.Distance(Player.Instance.transform.position, aliveCat.transform.position) < 70)
+      if (Vector3.Distance(Player.Instance.transform.position, aliveCat.transform.position) < 60)
       {
         AliveNearPlayer.Add(aliveCat);
       }

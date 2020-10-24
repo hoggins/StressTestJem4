@@ -39,7 +39,7 @@ public class BonusCollector : MonoBehaviour
 
   private void OnTriggerEnter(Collider other)
   {
-    if (other.CompareTag("SpeedBonus"))
+    if (other.CompareTag("SpeedBonus") || other.CompareTag("DoubleTakeBonus"))
     {
       if (_speedCoroutine != null)
       {
@@ -48,21 +48,8 @@ public class BonusCollector : MonoBehaviour
       }
 
       _speedCoroutine = StartCoroutine(StartSpeedUpBonus());
-      Collect(other);
-    }
-    else if (other.CompareTag("KillBonus"))
-    {
-      if (_killCoroutine != null)
-      {
-        StopCoroutine(_killCoroutine);
-        _killCoroutine = null;
-      }
-
-      _killCoroutine = StartCoroutine(StartKillBonus());
-      Collect(other);
-    }
-    else if (other.CompareTag("DoubleTakeBonus"))
-    {
+      
+      
       if (_doubleCoroutine != null)
       {
         StopCoroutine(_doubleCoroutine);
@@ -70,8 +57,25 @@ public class BonusCollector : MonoBehaviour
       }
 
       _doubleCoroutine = StartCoroutine(StartDoubleBonus());
+      
       Collect(other);
     }
+    // else if (other.CompareTag("KillBonus"))
+    // {
+    //   if (_killCoroutine != null)
+    //   {
+    //     StopCoroutine(_killCoroutine);
+    //     _killCoroutine = null;
+    //   }
+    //
+    //   _killCoroutine = StartCoroutine(StartKillBonus());
+    //   Collect(other);
+    // }
+    // else if (other.CompareTag("DoubleTakeBonus"))
+    // {
+    //
+    //   Collect(other);
+    // }
   }
 
   private void Collect(Collider other)
