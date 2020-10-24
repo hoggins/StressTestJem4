@@ -21,6 +21,9 @@ public class BallBotControl : MonoBehaviour
   
   [NonSerialized]
   public Rigidbody Rigidbody;
+  
+  [NonSerialized]
+  public CatPlacer CatPlacer;
 
 
   public float TimeBetweenMinJumps = 3.0f;
@@ -39,10 +42,12 @@ public class BallBotControl : MonoBehaviour
   private BotStateWander _wander;
   private BotStateKillPlayer _killPlayer;
   private BotStateCollect _collect;
+  private BotStateTryWin _win;
   private BotStateBase _currentState;
 
   private float _stateTimeLeft;
   private float _jumpTimeLeft;
+  private float _pressJumpTimer = 0;
 
   private void Awake()
   {
@@ -52,11 +57,13 @@ public class BallBotControl : MonoBehaviour
       (_wander = new BotStateWander(this)),
       (_killPlayer = new BotStateKillPlayer(this)),
       (_collect = new BotStateCollect(this)),
+      (_win = new BotStateTryWin(this)),
     };
     
     Ball = GetComponent<Ball>();
     Agent = GetComponent<NavMeshAgent>();
     Rigidbody = GetComponent<Rigidbody>();
+    CatPlacer = GetComponent<CatPlacer>();
     Agent.updatePosition = false;
     Agent.updateRotation = false;
     Agent.updateUpAxis = false;
@@ -76,28 +83,6 @@ public class BallBotControl : MonoBehaviour
   {
     _currentState.Update();
 
-    UpdateJump();
-  }
-
-  private void UpdateJump()
-  {
-    Jump = false;
-    _jumpTimeLeft -= Time.deltaTime;
-
-    if (_jumpTimeLeft <= 0)
-    {
-      if (Random.Range(0, 1f) < ChanceToJump)
-      {
-        Jump = true;
-      }
-
-      ResetJumpTimer();
-    }
-  }
-
-  private void ResetJumpTimer()
-  {
-    _jumpTimeLeft = Random.Range(TimeBetweenMinJumps, TimeBetweenMaxJumps);
   }
 
   private void LateUpdate()
@@ -138,9 +123,37 @@ public class BallBotControl : MonoBehaviour
 
   private void FixedUpdate()
   {
+    UpdateJump();
     _currentState.FixedUpdate();
     // Call the Move function of the ball controller
     UpdateStuckCheat();
+  }
+
+  private void UpdateJump()
+  {
+    Jump = false;
+    _jumpTimeLeft -= Time.fixedDeltaTime;
+
+    if (_jumpTimeLeft <= 0)
+    {
+      if (Random.Range(0, 1f) < ChanceToJump)
+      {
+        _pressJumpTimer = Random.Range(0.1f, 0.5f);
+      }
+
+      ResetJumpTimer();
+    }
+
+    _pressJumpTimer -= Time.fixedDeltaTime;
+    if (_pressJumpTimer > 0)
+    {
+      Jump = true;
+    }
+  }
+
+  private void ResetJumpTimer()
+  {
+    _jumpTimeLeft = Random.Range(TimeBetweenMinJumps, TimeBetweenMaxJumps);
   }
 
   private void UpdateStuckCheat()

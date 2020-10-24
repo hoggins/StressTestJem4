@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,6 +13,7 @@ public class CatPlacer : MonoBehaviour
   public int Level => _freePointsByLevel.Count;
   public int CatsAttached => _busyPointsByLevel.Sum(x => x.Count);
 
+  public bool AttachTest = false;
   public float[] SizeByLevel = new[]
   {
     0.62f,
@@ -21,6 +23,8 @@ public class CatPlacer : MonoBehaviour
     1.4f,
     1.72f
   };
+
+  public int AttachedCatsCount { get; private set; }
 
   private SphereCollider Collider;
 
@@ -38,25 +42,37 @@ public class CatPlacer : MonoBehaviour
   {
     _pointProvider = GameObject.Find("App").GetComponent<CatPointProvider>();
 
-
     for (int i = 0; i < 3; i++)
     {
-      AttachCat(CatFactory.Instance.MakeCat());
+      AttachCat(CatFactory.Instance.MakeCat(), Vector3.zero);
     }
+
+    if (AttachTest)
     StartCoroutine(Fade());
+  }
+
+  private void OnCollisionEnter(Collision other)
+  {
+    if (other.gameObject.CompareTag("Cat"))
+    {
+      AttachCat(other.gameObject, other.GetContact(0).point);
+    }
   }
 
   IEnumerator Fade()
   {
     while (true)
     {
-      AttachCat(CatFactory.Instance.MakeCat());
+      var go =CatFactory.Instance.MakeCat();
+      AttachCat(go, Vector3.zero);
       yield return new WaitForSeconds(1f);
     }
   }
 
-  public void AttachCat(GameObject catGo)
+  public void AttachCat(GameObject catGo, Vector3 hitPosition)
   {
+    AttachedCatsCount++;
+
     var freeLevel = _freePointsByLevel.FirstOrDefault(x => x.Count > 0);
     if (freeLevel == null)
     {
@@ -116,13 +132,16 @@ public class CatPlacer : MonoBehaviour
   {
     while (_freePointsByLevel.Count <= layer || _freePointsByLevel.Last().Count > 0)
     {
-      var go = Instantiate(CatFactory.Instance.MakeCat());
-      AttachCat(go);
+      var go = CatFactory.Instance.MakeCat();
+      AttachCat(go, Vector3.zero);
     }
   }
 
   public List<GameObject> DrainCats(Vector3 point)
   {
+    if (CatsAttached <= 3)
+      return new List<GameObject>();
+
     var toRemove = _busyPointsByLevel
       .SelectMany(x => x)
       .OrderBy(x => Vector3.Distance(x.transform.position, point))

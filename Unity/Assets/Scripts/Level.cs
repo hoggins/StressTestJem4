@@ -1,23 +1,22 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Rendering;
+﻿using UnityEngine;
+using UnityEngine.Assertions;
 
-namespace DefaultNamespace
+public class Level : MonoBehaviour
 {
-  public class Level : MonoBehaviour
+  public static Level Instance; 
+    
+  public Bounds LevelBounds;
+  public Transform WinTargetPoint;
+
+  void Awake()
   {
-    public Bounds LevelBounds;
-    public static Level Instance; 
+    Instance = this;
+    Assert.IsNotNull(WinTargetPoint);
+  }
 
-    void Awake()
-    {
-      Instance = this;
-    }
-
-    private void OnDrawGizmos()
-    {
-      Gizmos.color = new Color(0, 1, 0, .9f);
-      Gizmos.DrawWireCube(LevelBounds.center, LevelBounds.size);
-    }
+  private void OnDrawGizmos()
+  {
+    Gizmos.color = new Color(0, 1, 0, .9f);
+    Gizmos.DrawWireCube(LevelBounds.center, LevelBounds.size);
   }
 }

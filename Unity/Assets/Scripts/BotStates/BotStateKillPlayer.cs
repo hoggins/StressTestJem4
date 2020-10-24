@@ -31,8 +31,6 @@ namespace BotStates
       
       Debug.DrawLine(Control.transform.position, targetPlayerPosition, Color.red, 0f, false);
       Move = -(Control.Rigidbody.position - targetPlayerPosition).normalized;
-      
-      Control.Agent.SetDestination(targetPlayerPosition);
     }
 
     public override bool CanSelect()

@@ -19,6 +19,14 @@ public class CatControl : MonoBehaviour
   {
     _collider.enabled = false;
     _body.isKinematic = true;
+    AliveCats.Remove(this);
+  }
+
+  public void PrepareToBeReal()
+  {
+    AliveCats.Add(this);
+    _collider.enabled = true;
+    _body.isKinematic = false;
   }
 
   public static CatControl GetClosest(Vector3 position)
