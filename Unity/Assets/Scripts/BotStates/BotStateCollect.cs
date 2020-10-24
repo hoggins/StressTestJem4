@@ -4,16 +4,21 @@
   {
     public BotStateCollect(BallBotControl control) : base(control)
     {
-      StateDuration = 20f;
+      StateDuration = 10f;
       StateDurationRandom = 10;
-      ChanceToSelect = 1f;
+      ChanceToSelect = 0.8f;
     }
     
     public override void Update()
     {
       var closest = CatControl.GetClosest(Control.Rigidbody.position);
-      
-      _move = -(Control.Rigidbody.position - Control.Agent.nextPosition).normalized;
+      if (closest == null)
+      {
+        Finish = true;
+        return;
+      }
+
+      Move = -(Control.Rigidbody.position - Control.Agent.nextPosition).normalized;
       Control.Agent.SetDestination(closest.transform.position);
     }
 

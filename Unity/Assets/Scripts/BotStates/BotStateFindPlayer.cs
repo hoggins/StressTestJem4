@@ -14,7 +14,7 @@ namespace BotStates
 
     public override void Update()
     {
-      _move = -(Control.Rigidbody.position - Control.Agent.nextPosition).normalized;
+      Move = -(Control.Rigidbody.position - Control.Agent.nextPosition).normalized;
       Control.Agent.SetDestination(Player.Instance.transform.position);
     }
   }

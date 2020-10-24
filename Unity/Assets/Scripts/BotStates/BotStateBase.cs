@@ -10,7 +10,7 @@ namespace BotStates
     public float ChanceToSelect = 1f;
     public bool Finish;
     
-    protected Vector3 _move;
+    protected Vector3 Move;
 
     public BotStateBase(BallBotControl control)
     {
@@ -40,7 +40,7 @@ namespace BotStates
 
     public virtual void FixedUpdate()
     {
-      Control.Ball.Move(_move, false);
+      Control.Ball.Move(Move, Control.Jump);
     }
   }
 }

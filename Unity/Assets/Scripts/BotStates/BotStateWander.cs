@@ -37,7 +37,6 @@ namespace BotStates
         if (NavMesh.SamplePosition(result, out var hit, 10, int.MaxValue))
         {
           _targetPosition = hit.position;
-          Debug.DrawLine(Control.transform.position, _targetPosition, Color.red, 3.0f,false);
           Control.Agent.SetDestination(_targetPosition);
           break;
         }
@@ -48,10 +47,14 @@ namespace BotStates
 
     public override void Update()
     {
-      _move = -(Control.Rigidbody.position - _targetPosition).normalized;
+      Move = -(Control.Rigidbody.position - _targetPosition).normalized;
       if (Vector3.Distance(_targetPosition, Control.Rigidbody.position) < 5f)
       {
         Finish = true;
+      }
+      else
+      {
+        Debug.DrawLine(Control.transform.position, _targetPosition, Color.green, 0f,false);
       }
     }
   }

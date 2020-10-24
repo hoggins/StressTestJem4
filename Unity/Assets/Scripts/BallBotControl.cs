@@ -22,7 +22,15 @@ public class BallBotControl : MonoBehaviour
   [NonSerialized]
   public Rigidbody Rigidbody;
 
+
+  public float TimeBetweenMinJumps = 3.0f;
+  public float TimeBetweenMaxJumps = 3.0f;
+  public float ChanceToJump = .25f;
+
+  public bool Jump;
+
   private float _stuckDuration;
+  
   private Vector3 _lastPosition;
   private Vector3? _stuckStartPosition;
 
@@ -34,6 +42,7 @@ public class BallBotControl : MonoBehaviour
   private BotStateBase _currentState;
 
   private float _stateTimeLeft;
+  private float _jumpTimeLeft;
 
   private void Awake()
   {
@@ -54,6 +63,7 @@ public class BallBotControl : MonoBehaviour
     _lastPosition = transform.position;
 
     SelectRandomState();
+    ResetJumpTimer();
   }
 
   void Start()
@@ -65,6 +75,29 @@ public class BallBotControl : MonoBehaviour
   private void Update()
   {
     _currentState.Update();
+
+    UpdateJump();
+  }
+
+  private void UpdateJump()
+  {
+    Jump = false;
+    _jumpTimeLeft -= Time.deltaTime;
+
+    if (_jumpTimeLeft <= 0)
+    {
+      if (Random.Range(0, 1f) < ChanceToJump)
+      {
+        Jump = true;
+      }
+
+      ResetJumpTimer();
+    }
+  }
+
+  private void ResetJumpTimer()
+  {
+    _jumpTimeLeft = Random.Range(TimeBetweenMinJumps, TimeBetweenMaxJumps);
   }
 
   private void LateUpdate()
@@ -114,6 +147,9 @@ public class BallBotControl : MonoBehaviour
   {
     const float stuckDistance = 2f;
     const float stuckDuration = 2f;
+    if(!Agent.hasPath)
+      ResetStuck();
+    
     if (Vector3.Distance(_lastPosition, Rigidbody.position) < stuckDistance)
     {
       if (!_stuckStartPosition.HasValue)
@@ -140,7 +176,7 @@ public class BallBotControl : MonoBehaviour
       Agent.ResetPath();
       _stuckDuration = 0;
       Agent.Warp(Rigidbody.position);
-      StartCoroutine(Boost());
+      StartCoroutine(StuckBoost());
     }
 
     _lastPosition = Rigidbody.transform.position;
@@ -153,7 +189,7 @@ public class BallBotControl : MonoBehaviour
     Ball.m_MovePowerBonus = 0f;
   }
 
-  private IEnumerator Boost()
+  private IEnumerator StuckBoost()
   {
     Ball.m_MovePowerBonus = 5.0f; 
     yield return new WaitForSeconds(2.0f);
