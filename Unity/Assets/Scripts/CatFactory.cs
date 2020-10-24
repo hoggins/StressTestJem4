@@ -8,18 +8,24 @@ public class CatFactory : MonoBehaviour
   public Color[] Colors = new []{Color.blue};
 
   public GameObject[] Prefabs;
+  public GameObject ActorRoot;
 
   private System.Random Random = new System.Random();
   private void Awake()
   {
     Instance = this;
+    ActorRoot = new GameObject("ActorRoot");
   }
 
   public GameObject MakeCat()
   {
     var prefab = Prefabs[Random.Next(Prefabs.Length)];
 
+#if UNITY_EDITOR
+    var go = Instantiate(prefab, ActorRoot.transform);
+#else
     var go = Instantiate(prefab);
+#endif
 
     var ren = go.GetComponent<Renderer>();
     var newMat = new Material(ren.material);
