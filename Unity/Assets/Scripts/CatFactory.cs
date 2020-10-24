@@ -7,6 +7,8 @@ public class CatFactory : MonoBehaviour
 
   public Color[] Colors = new []{Color.blue};
 
+  public Mesh[] Meshes;
+
   public GameObject DefaultCat;
 
 
@@ -24,6 +26,9 @@ public class CatFactory : MonoBehaviour
     var newMat = new Material(ren.material);
     newMat.SetColor("_BaseColor", Colors[Random.Next(Colors.Length)]);
     ren.material = newMat;
+
+    var meshFilter = go.GetComponent<MeshFilter>();
+    meshFilter.mesh = Meshes[Random.Next(Meshes.Length)];
 
     return go;
   }

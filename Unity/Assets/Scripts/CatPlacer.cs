@@ -146,7 +146,7 @@ public class CatPlacer : MonoBehaviour
 
     countToTake = Math.Min(minCount, catsAttached - countToTake);
 
-    return DrainFromContact();
+    // return DrainFromContact();
 
     return DrainEx();
 
