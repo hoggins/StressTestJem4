@@ -15,7 +15,6 @@ namespace DefaultNamespace
 
     void OnCollisionEnter(Collision collision)
     {
-      return;
       if (!collision.gameObject.CompareTag("Bot") && !collision.gameObject.CompareTag("Player"))
         return;
 
@@ -26,7 +25,7 @@ namespace DefaultNamespace
 
       var contact = collision.GetContact(0);
 
-      var cats = _placer.DrainCats(contact.point);
+      var cats = _placer.DrainCats(contact.point, 3);
 
       foreach (var cat in cats)
       {

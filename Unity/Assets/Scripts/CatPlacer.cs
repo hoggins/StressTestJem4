@@ -137,39 +137,78 @@ public class CatPlacer : MonoBehaviour
     }
   }
 
-  public List<GameObject> DrainCats(Vector3 point)
+  public List<GameObject> DrainCats(Vector3 point, int countToTake)
   {
-    if (CatsAttached <= 3)
+    const int minCount = 3;
+    var catsAttached = CatsAttached;
+    if (catsAttached <= minCount)
       return new List<GameObject>();
 
-    var toRemove = _busyPointsByLevel
-      .SelectMany(x => x)
-      .OrderBy(x => Vector3.Distance(x.transform.position, point))
-      .Take(3)
-      .ToList();
-    for (var busyLayerIdx = 0; busyLayerIdx < _busyPointsByLevel.Count; busyLayerIdx++)
+    countToTake = Math.Min(minCount, catsAttached - countToTake);
+
+    return DrainFromContact();
+
+    return DrainEx();
+
+    List<GameObject> DrainEx()
     {
-      var busyLayer = _busyPointsByLevel[busyLayerIdx];
-      foreach (var cat in toRemove)
+      var handled = new List<GameObject>();
+      for (var i = _busyPointsByLevel.Count - 1; i >= 0; i--)
       {
-        if (!busyLayer.Remove(cat))
-          continue;
-        _freePointsByLevel[busyLayerIdx].Add(cat.transform.localPosition);
+        var layer = _busyPointsByLevel[i];
+        var cat = layer[layer.Count-1];
+        handled.Add(cat);
+        layer.RemoveAt(layer.Count - 1);
+
+        _freePointsByLevel[i].Add(cat.transform.position);
+
+        if (layer.Count == 0)
+        {
+          _busyPointsByLevel.RemoveAt(i);
+          _freePointsByLevel.RemoveAt(i);
+          UpdateStats();
+        }
+
+        if (handled.Count == countToTake)
+          return handled;
       }
 
-      if (busyLayer.Count == 0)
-      {
-        _busyPointsByLevel.RemoveAt(busyLayerIdx);
-        _freePointsByLevel.RemoveAt(busyLayerIdx);
-        Debug.Log("downshift");
-      }
-      else
-      {
-        Debug.Log($"pending for downshift {busyLayer.Count}");
-      }
-
+      return handled;
     }
 
-    return toRemove;
+    List<GameObject> DrainFromContact()
+    {
+      var toRemove = _busyPointsByLevel
+        .SelectMany(x => x)
+        .OrderBy(x => Vector3.Distance(x.transform.position, point))
+        .Take(countToTake)
+        .ToList();
+      var handled = new List<GameObject>();
+      for (var busyLayerIdx = 0; busyLayerIdx < _busyPointsByLevel.Count; busyLayerIdx++)
+      {
+        var busyLayer = _busyPointsByLevel[busyLayerIdx];
+        foreach (var cat in toRemove)
+        {
+          if (!busyLayer.Remove(cat))
+            continue;
+          _freePointsByLevel[busyLayerIdx].Add(cat.transform.localPosition);
+          handled.Add(cat);
+        }
+
+        if (busyLayer.Count == 0)
+        {
+          _busyPointsByLevel.RemoveAt(busyLayerIdx);
+          _freePointsByLevel.RemoveAt(busyLayerIdx);
+          UpdateStats();
+          Debug.Log("downshift");
+        }
+        else
+        {
+          Debug.Log($"pending for downshift {busyLayer.Count}");
+        }
+      }
+
+      return handled;
+    }
   }
 }
