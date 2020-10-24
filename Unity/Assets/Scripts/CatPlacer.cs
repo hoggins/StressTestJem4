@@ -31,7 +31,7 @@ public class CatPlacer : MonoBehaviour
   private List<List<Vector3>> _freePointsByLevel = new List<List<Vector3>>();
   private List<List<GameObject>> _busyPointsByLevel = new List<List<GameObject>>();
   private CatPointProvider _pointProvider;
-  
+
   private Dictionary<GameObject, Coroutine> _attachingCatsCoroutines = new Dictionary<GameObject, Coroutine>();
 
 
@@ -68,6 +68,7 @@ public class CatPlacer : MonoBehaviour
     while (true)
     {
       var go =CatFactory.Instance.MakeCat();
+      go.transform.position = transform.position;
       AttachCat(go);
       yield return new WaitForSeconds(1f);
     }
@@ -91,7 +92,7 @@ public class CatPlacer : MonoBehaviour
     catGo.transform.SetParent(transform, true);
 
     _attachingCatsCoroutines.Add(catGo, StartCoroutine(AttachCoroutine(catGo, point)));
-    
+
     _busyPointsByLevel[_busyPointsByLevel.Count-1].Add(catGo);
 
     UpdateStats();
@@ -118,22 +119,22 @@ public class CatPlacer : MonoBehaviour
     // var realStart = catGo.transform.localPosition;
     //   var posStart = startForward * Vector3.forward * distanceToStart;
     //   var posEnd = endForward * Vector3.forward * distanceToTarget;
-    
+
     // Debug.Log($"start {catGo.transform.localPosition} {posStart}");
-    
+
     var currentCatRotation = catGo.transform.localRotation;
     var targetCatRotation = Random.rotation;
     do
     {
       elapsed += Time.deltaTime;
-      
+
       var t = elapsed / duration;
-      
+
       // var currentRotation = Quaternion.Slerp(startForward, endForward, t);
       // catGo.transform.localPosition = currentRotation * Vector3.forward * Mathf.Lerp(distanceToStart, distanceToTarget, t);
       catGo.transform.localPosition = Vector3.Lerp(startPoint, targetPoint, t);
       catGo.transform.localRotation = Quaternion.Lerp(currentCatRotation, targetCatRotation, t);
-      
+
       yield return null;
     } while (elapsed < duration);
 

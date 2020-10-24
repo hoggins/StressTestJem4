@@ -15,7 +15,7 @@ public class CatControl : MonoBehaviour
   public Rigidbody Body;
 
 
-  
+
   private List<CatStateBase> _allStates;
   private CatStateBase _currentState;
   private float _changeStateDur;
@@ -48,8 +48,8 @@ public class CatControl : MonoBehaviour
   public void PrepareToBeFly()
   {
     gameObject.layer = 9;
-    _collider.enabled = true;
-    _body.isKinematic = false;
+    Collider.enabled = true;
+    Body.isKinematic = false;
   }
 
   public void PrepareToBeReal()
@@ -65,7 +65,7 @@ public class CatControl : MonoBehaviour
       var catPlacer = go.GetComponent<CatPlacer>();
       if (catPlacer == null)
         Debug.Log("null ", go);
-      catPlacer.AttachCat(gameObject, transform.position);
+      catPlacer.AttachCat(gameObject);
     }
     else
     {
@@ -73,7 +73,7 @@ public class CatControl : MonoBehaviour
       AliveCats.Add(this);
     Collider.enabled = true;
     Body.isKinematic = false;
-    
+
     SelectRandomState();
     }
   }
