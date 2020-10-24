@@ -21,6 +21,9 @@ public class BallBotControl : MonoBehaviour
   
   [NonSerialized]
   public Rigidbody Rigidbody;
+  
+  [NonSerialized]
+  public CatPlacer CatPlacer;
 
 
   public float TimeBetweenMinJumps = 3.0f;
@@ -39,6 +42,7 @@ public class BallBotControl : MonoBehaviour
   private BotStateWander _wander;
   private BotStateKillPlayer _killPlayer;
   private BotStateCollect _collect;
+  private BotStateTryWin _win;
   private BotStateBase _currentState;
 
   private float _stateTimeLeft;
@@ -53,11 +57,13 @@ public class BallBotControl : MonoBehaviour
       (_wander = new BotStateWander(this)),
       (_killPlayer = new BotStateKillPlayer(this)),
       (_collect = new BotStateCollect(this)),
+      (_win = new BotStateTryWin(this)),
     };
     
     Ball = GetComponent<Ball>();
     Agent = GetComponent<NavMeshAgent>();
     Rigidbody = GetComponent<Rigidbody>();
+    CatPlacer = GetComponent<CatPlacer>();
     Agent.updatePosition = false;
     Agent.updateRotation = false;
     Agent.updateUpAxis = false;

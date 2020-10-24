@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,6 +14,7 @@ public class CatPlacer : MonoBehaviour
   public int CatsAttached => _busyPointsByLevel.Sum(x => x.Count);
 
   public GameObject DefaultCat;
+  public bool AttachTest = false;
 
   public float[] SizeByLevel = new[]
   {
@@ -23,6 +25,8 @@ public class CatPlacer : MonoBehaviour
     1.4f,
     1.72f
   };
+
+  public int AttachedCatsCount { get; private set; }
 
   private SphereCollider Collider;
 
@@ -41,11 +45,23 @@ public class CatPlacer : MonoBehaviour
     _pointProvider = GameObject.Find("App").GetComponent<CatPointProvider>();
 
 
-    for (int i = 0; i < 3; i++)
+    if (AttachTest)
     {
-      AttachCat(Instantiate(DefaultCat));
+      for (int i = 0; i < 3; i++)
+      {
+        AttachCat(Instantiate(DefaultCat), Vector3.zero);
+      }
+
+      StartCoroutine(Fade());
     }
-    StartCoroutine(Fade());
+  }
+
+  private void OnCollisionEnter(Collision other)
+  {
+    if (other.gameObject.CompareTag("Cat"))
+    {
+      AttachCat(other.gameObject, other.GetContact(0).point);
+    }
   }
 
   IEnumerator Fade()
@@ -53,13 +69,15 @@ public class CatPlacer : MonoBehaviour
     while (true)
     {
       var go = Instantiate(DefaultCat);
-      AttachCat(go);
+      AttachCat(go, Vector3.zero);
       yield return new WaitForSeconds(0.3f);
     }
   }
 
-  public void AttachCat(GameObject catGo)
+  public void AttachCat(GameObject catGo, Vector3 hitPosition)
   {
+    AttachedCatsCount++;
+    
     var freeLevel = _freePointsByLevel.FirstOrDefault(x => x.Count > 0);
     if (freeLevel == null)
     {
@@ -119,7 +137,7 @@ public class CatPlacer : MonoBehaviour
     while (_freePointsByLevel.Count <= layer || _freePointsByLevel.Last().Count > 0)
     {
       var go = Instantiate(DefaultCat);
-      AttachCat(go);
+      AttachCat(go, Vector3.zero);
     }
   }
 }
