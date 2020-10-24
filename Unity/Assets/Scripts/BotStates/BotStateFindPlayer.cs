@@ -4,12 +4,12 @@ namespace BotStates
 {
   public class BotStateFindPlayer : BotStateBase
   {
-
     public BotStateFindPlayer(BallBotControl control)
       : base(control)
     {
       StateDuration = 10f;
       StateDurationRandom = 10;
+      ChanceToSelect = 0.25f;
     }
 
     public override void Update()

@@ -12,10 +12,13 @@ namespace BotStates
     {
       StateDuration = 10f;
       StateDurationRandom = 5f;
+      ChanceToSelect = 0.5f;
     }
 
     public override void OnEnter()
     {
+      base.OnEnter();
+      
       var retries = 10;
       while (retries > 0)
       {
@@ -24,12 +27,17 @@ namespace BotStates
         var from = new Vector2(bounds.min.x, bounds.min.z);
         var to = new Vector2(bounds.max.x, bounds.max.z);
 
-        var result = new Vector3(Random.Range(from.x, to.x), 0, Random.Range(from.y, to.y));
+        var result = new Vector3(Random.Range(from.x, to.x), 200, Random.Range(from.y, to.y));
 
+        if (Physics.Raycast(new Ray(result, Vector3.down), out var rayHit, 400, int.MaxValue))
+        {
+          result.y = rayHit.point.y;
+        }
 
         if (NavMesh.SamplePosition(result, out var hit, 10, int.MaxValue))
         {
           _targetPosition = hit.position;
+          Debug.DrawLine(Control.transform.position, _targetPosition, Color.red, 3.0f,false);
           Control.Agent.SetDestination(_targetPosition);
           break;
         }
@@ -41,6 +49,10 @@ namespace BotStates
     public override void Update()
     {
       _move = -(Control.Rigidbody.position - _targetPosition).normalized;
+      if (Vector3.Distance(_targetPosition, Control.Rigidbody.position) < 5f)
+      {
+        Finish = true;
+      }
     }
   }
 }

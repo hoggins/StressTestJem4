@@ -7,6 +7,8 @@ namespace BotStates
     public BallBotControl Control { get; }
     public float StateDuration = 10f;
     public float StateDurationRandom = 0;
+    public float ChanceToSelect = 1f;
+    public bool Finish;
     
     protected Vector3 _move;
 
@@ -17,12 +19,13 @@ namespace BotStates
 
     public virtual bool CanSelect()
     {
-      return true;
+      return Random.Range(0, 1f) < ChanceToSelect;
     }
 
     public virtual void OnEnter()
     {
-      
+      Finish = false;
+
     }
     
     public virtual void Update()

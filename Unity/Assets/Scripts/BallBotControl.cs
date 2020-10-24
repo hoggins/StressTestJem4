@@ -29,6 +29,8 @@ public class BallBotControl : MonoBehaviour
   private List<BotStateBase> _allStates = new List<BotStateBase>();
   private BotStateFindPlayer _findPlayer;
   private BotStateWander _wander;
+  private BotStateKillPlayer _killPlayer;
+  private BotStateCollect _collect;
   private BotStateBase _currentState;
 
   private float _stateTimeLeft;
@@ -39,6 +41,8 @@ public class BallBotControl : MonoBehaviour
     {
       (_findPlayer = new BotStateFindPlayer(this)),
       (_wander = new BotStateWander(this)),
+      (_killPlayer = new BotStateKillPlayer(this)),
+      (_collect = new BotStateCollect(this)),
     };
     
     Ball = GetComponent<Ball>();
@@ -82,9 +86,21 @@ public class BallBotControl : MonoBehaviour
 
   private void SelectRandomState()
   {
-    var availableStates = _allStates.Where(x => x.CanSelect()).ToList();
-    var index = Random.Range(0, availableStates.Count);
-    SetState(availableStates[index]);
+    var availableStates = new List<BotStateBase>();
+
+    var tries = 15;
+    while (availableStates.Count == 0 && tries-- > 0)
+      availableStates = _allStates.Where(x => x.CanSelect()).ToList();
+
+    if (tries <= 0)
+    {
+      SetState(_wander);
+    }
+    else
+    {
+      var index = Random.Range(0, availableStates.Count);
+      SetState(availableStates[index]);
+    }
   }
 
   private void FixedUpdate()
@@ -145,14 +161,18 @@ public class BallBotControl : MonoBehaviour
     ResetStuck();
   }
 
-  private void SetState(BotStateBase findPlayer)
+  private void SetState(BotStateBase state)
   {
-    _currentState = findPlayer;
+    _currentState = state;
+    _currentState.OnEnter();
     _stateTimeLeft = _currentState.StateDuration + Random.Range(0, _currentState.StateDurationRandom);
   }
 
   private void OnDrawGizmos()
   {
+    if(_currentState == null)
+      return;
+
 #if UNITY_EDITOR
     Handles.Label(transform.position + new Vector3(1, 2, 0), _currentState.GetType().Name);
 #endif
