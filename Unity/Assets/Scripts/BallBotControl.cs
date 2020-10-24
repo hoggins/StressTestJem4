@@ -101,6 +101,14 @@ public class BallBotControl : MonoBehaviour
       SelectRandomState();
     }
   }
+  
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.gameObject.CompareTag("WinTrigger"))
+    {
+      GameManager.Instance.Lose();
+    }
+  }
 
   private void SelectRandomState()
   {
