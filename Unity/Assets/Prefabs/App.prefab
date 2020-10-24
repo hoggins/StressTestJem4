@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2088985173778649892}
   - component: {fileID: 7089822688413335103}
   - component: {fileID: 4762101711738840099}
+  - component: {fileID: 7655497683785680743}
   m_Layer: 0
   m_Name: App
   m_TagString: Untagged
@@ -97,3 +98,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetAliveCatCount: 400
+--- !u!114 &7655497683785680743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088985173778649883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d6488550e531642aee4ae0f3716fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitEnemy:
+  - {fileID: 8300000, guid: c99978f38ec3547429cafef6844a816a, type: 3}
+  - {fileID: 8300000, guid: 30b0d01b752b0774f891c9a53a905df3, type: 3}
+  - {fileID: 8300000, guid: e9587d5b5c6fd8d4994f427a9c55f655, type: 3}
+  - {fileID: 8300000, guid: fef92edb93148d748930eee39e255ac1, type: 3}
+  RandomPhrases: []
+  Player: {fileID: 0}
+  Music: {fileID: 0}
+  MusicMenu: {fileID: 0}

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Controllers;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -12,6 +13,7 @@ namespace DefaultNamespace
     private CatPlacer _placer;
 
     private LinkedList<FlyingCat> _flyingQueue = new LinkedList<FlyingCat>();
+    private AudioRollerPlayer _audio;
 
     private class FlyingCat
     {
@@ -28,6 +30,7 @@ namespace DefaultNamespace
     private void Awake()
     {
       _placer = GetComponent<CatPlacer>();
+      _audio = GetComponent<AudioRollerPlayer>();
     }
 
     private void Update()
@@ -66,7 +69,10 @@ namespace DefaultNamespace
       else if (force >= 1)
         toDetach = Math.Max(1, (int) (totalCount * 0.1f));
 
-Debug.Log($"force {force} total {totalCount} res {toDetach}");
+      Debug.Log($"force {force} total {totalCount} res {toDetach}");
+
+      if (_audio != null)
+        AudioController.Instance.PlayHitEnemy(_audio.Source);
 
       if (toDetach == 0)
         return;
