@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Player:MonoBehaviour
 {
@@ -10,5 +11,13 @@ public class Player:MonoBehaviour
   {
     Instance = this;
     Rigidbody = GetComponent<Rigidbody>();
+  }
+
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.gameObject.CompareTag("WinTrigger"))
+    {
+      GameManager.Instance.Win();
+    }
   }
 }

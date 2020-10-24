@@ -8,7 +8,7 @@ namespace BotStates
       : base(control)
     {
       StateDuration = 10f;
-      StateDurationRandom = 10;
+      StateDurationRandom = 5f;
       ChanceToSelect = 0.35f;
     }
 

@@ -5,6 +5,7 @@ namespace UnityStandardAssets.Vehicles.Ball
 {
     public class Ball : MonoBehaviour
     {
+      [SerializeField] public AnimationCurve PowerCurveBySize;
         [SerializeField] public float m_MovePower = 5; // The force added to the ball to move it.
         [SerializeField] public float m_MovePowerBonus = 0;
         [SerializeField] public bool m_UseTorque = true; // Whether or not to use torque to move the ball.
@@ -13,11 +14,13 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         private const float k_GroundRayLength = 1f; // The length of the ray to check if the ball is grounded.
         private Rigidbody m_Rigidbody;
+        private SphereCollider _collider;
 
 
         private void Start()
         {
             m_Rigidbody = GetComponent<Rigidbody>();
+            _collider = GetComponent<SphereCollider>();
             // Set the maximum angular velocity.
             GetComponent<Rigidbody>().maxAngularVelocity = m_MaxAngularVelocity;
         }
@@ -25,7 +28,8 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         public void Move(Vector3 moveDirection, bool jump)
         {
-          var powerWithBonus = m_MovePower + m_MovePowerBonus;
+          var power = PowerCurveBySize.Evaluate(_collider.radius);
+          var powerWithBonus = power + m_MovePowerBonus;
             // If using torque to rotate the ball...
             if (m_UseTorque)
             {

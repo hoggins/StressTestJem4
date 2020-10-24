@@ -76,6 +76,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e004fefca5c7ba44d9c5ffd46fdee2ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PowerCurveBySize:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 5
+      inSlope: 0.0009640503
+      outSlope: 0.0009640503
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.30864197
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: 15
+      inSlope: 4
+      outSlope: 4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   m_MovePower: 5
   m_MovePowerBonus: 0
   m_UseTorque: 1
@@ -93,8 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b21ea0dd7e7b843b1fbe38453e3216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultCat: {fileID: 535946751894229678, guid: 58fb24c1d965d6840878113538df1aee,
-    type: 3}
+  AttachTest: 0
   SizeByLevel:
   - 0.62
   - 0.74
