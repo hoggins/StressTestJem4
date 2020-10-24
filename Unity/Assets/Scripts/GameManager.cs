@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Diagnostics;
+using UnityStandardAssets.Cameras;
 
 public class GameManager:MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class GameManager:MonoBehaviour
     Lose
   }
 
-  public WinState CurrentWinState = WinState.None; 
+  public WinState CurrentWinState = WinState.None;
+  public int WinScore = 30;
   
   
   public static readonly HashSet<CatControl> AliveNearPlayer = new HashSet<CatControl>();
