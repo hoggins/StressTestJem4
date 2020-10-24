@@ -1,34 +1,55 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using BotStates;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.AI;
 using UnityStandardAssets.Vehicles.Ball;
+using Random = UnityEngine.Random;
 
 public class BallBotControl : MonoBehaviour
 {
-  private Ball _ball;
-  private NavMeshAgent _agent;
-  private Rigidbody _rigidbody;
-
-  private Vector3 _move;
-  private bool _jump;
+  [NonSerialized]
+  public Ball Ball;
+  
+  [NonSerialized]
+  public NavMeshAgent Agent;
+  
+  [NonSerialized]
+  public Rigidbody Rigidbody;
 
   private float _stuckDuration;
   private Vector3 _lastPosition;
   private Vector3? _stuckStartPosition;
 
+  private List<BotStateBase> _allStates = new List<BotStateBase>();
+  private BotStateFindPlayer _findPlayer;
+  private BotStateWander _wander;
+  private BotStateBase _currentState;
+
+  private float _stateTimeLeft;
+
   private void Awake()
   {
-    _ball = GetComponent<Ball>();
-    _agent = GetComponent<NavMeshAgent>();
-    _rigidbody = GetComponent<Rigidbody>();
-    _agent.updatePosition = false;
-    _agent.updateRotation = false;
-    _agent.updateUpAxis = false;
+    _allStates = new List<BotStateBase>
+    {
+      (_findPlayer = new BotStateFindPlayer(this)),
+      (_wander = new BotStateWander(this)),
+    };
+    
+    Ball = GetComponent<Ball>();
+    Agent = GetComponent<NavMeshAgent>();
+    Rigidbody = GetComponent<Rigidbody>();
+    Agent.updatePosition = false;
+    Agent.updateRotation = false;
+    Agent.updateUpAxis = false;
     _lastPosition = transform.position;
-    // _agent.Warp(transform.position);
-    // _agent.ResetPath();
 
+    SelectRandomState();
   }
 
   void Start()
@@ -39,33 +60,37 @@ public class BallBotControl : MonoBehaviour
 
   private void Update()
   {
-    _move = Vector3.forward;
-    var direction = -(_rigidbody.position - _agent.nextPosition).normalized;
-    _move = direction;
-
-    _agent.SetDestination(Player.Instance.transform.position);
-    // _jump = true;
-    
+    _currentState.Update();
   }
 
   private void LateUpdate()
   {
-    var max = Mathf.Max(_rigidbody.velocity.magnitude, 5);
-    if (Vector3.Distance(_rigidbody.position, _agent.nextPosition) > max)
-      _agent.speed = 0f;
+    var max = Mathf.Max(Rigidbody.velocity.magnitude, 5);
+    if (Vector3.Distance(Rigidbody.position, Agent.nextPosition) > max)
+      Agent.speed = 0f;
     else
-     _agent.speed = max;
+      Agent.speed = max;
+
+    _currentState.LateUpdate();
     
-    // _agent.velocity = agentVelocity.magnitude < rigidbodyVelocity.magnitude
-    // ? rigidbodyVelocity
-    // : agentVelocity;
+    _stateTimeLeft -= Time.deltaTime;
+    if (_stateTimeLeft <= 0)
+    {
+      SelectRandomState();
+    }
+  }
+
+  private void SelectRandomState()
+  {
+    var availableStates = _allStates.Where(x => x.CanSelect()).ToList();
+    var index = Random.Range(0, availableStates.Count);
+    SetState(availableStates[index]);
   }
 
   private void FixedUpdate()
   {
+    _currentState.FixedUpdate();
     // Call the Move function of the ball controller
-    _ball.Move(_move, _jump);
-    _jump = false;
     UpdateStuckCheat();
   }
 
@@ -73,14 +98,14 @@ public class BallBotControl : MonoBehaviour
   {
     const float stuckDistance = 2f;
     const float stuckDuration = 2f;
-    if (Vector3.Distance(_lastPosition, _rigidbody.position) < stuckDistance)
+    if (Vector3.Distance(_lastPosition, Rigidbody.position) < stuckDistance)
     {
       if (!_stuckStartPosition.HasValue)
       {
         _stuckStartPosition = _lastPosition;
       }
 
-      if (Vector3.Distance(_stuckStartPosition.Value, _rigidbody.position) < stuckDistance)
+      if (Vector3.Distance(_stuckStartPosition.Value, Rigidbody.position) < stuckDistance)
       {
         _stuckDuration += Time.deltaTime;
       }
@@ -96,27 +121,40 @@ public class BallBotControl : MonoBehaviour
 
     if (_stuckDuration > stuckDuration)
     {
-      _agent.ResetPath();
+      Agent.ResetPath();
       _stuckDuration = 0;
-      _agent.Warp(_rigidbody.position);
+      Agent.Warp(Rigidbody.position);
       StartCoroutine(Boost());
     }
 
-    _lastPosition = _rigidbody.transform.position;
+    _lastPosition = Rigidbody.transform.position;
   }
 
   private void ResetStuck()
   {
     _stuckDuration = 0f;
     _stuckStartPosition = null;
-    _ball.m_MovePowerBonus = 0f;
+    Ball.m_MovePowerBonus = 0f;
   }
 
   private IEnumerator Boost()
   {
-    _ball.m_MovePowerBonus = 5.0f; 
+    Ball.m_MovePowerBonus = 5.0f; 
     yield return new WaitForSeconds(2.0f);
 
     ResetStuck();
+  }
+
+  private void SetState(BotStateBase findPlayer)
+  {
+    _currentState = findPlayer;
+    _stateTimeLeft = _currentState.StateDuration + Random.Range(0, _currentState.StateDurationRandom);
+  }
+
+  private void OnDrawGizmos()
+  {
+#if UNITY_EDITOR
+    Handles.Label(transform.position + new Vector3(1, 2, 0), _currentState.GetType().Name);
+#endif
   }
 }

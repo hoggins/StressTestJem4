@@ -121,7 +121,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 1f43f05be54af7e489ad8066b7a32c81, type: 2}
 --- !u!1 &29344515 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ae99664e560284474be995b01a82f1dd,
@@ -142,6 +142,75 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3237046608918968389, guid: ae99664e560284474be995b01a82f1dd, type: 3}
+--- !u!1001 &77780834
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -51.97349
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.674289
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.339773
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155840365295, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_Name
+      value: RollerBallBot (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24e8963f005af9643aaec5dbce09347b, type: 3}
 --- !u!1 &81028155
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,63 +260,190 @@ LightProbeGroup:
   - {x: -1, y: -1, z: 1}
   - {x: -1, y: -1, z: -1}
   m_Dering: 1
---- !u!1001 &198135510
+--- !u!1 &156465908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 156465910}
+  - component: {fileID: 156465909}
+  m_Layer: 0
+  m_Name: Level
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &156465909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156465908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5719315f73fa4d0aafcf5da35591df65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelBounds:
+    m_Center: {x: 0, y: 6.47, z: 0}
+    m_Extent: {x: 64.5, y: 29.3, z: 62.01}
+--- !u!4 &156465910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156465908}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3, y: 0, z: 7.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &310953345
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 100000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
-      propertyPath: m_Name
-      value: RollerBall
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.400257
+      value: -6.8306413
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.68
+      value: 0.40792525
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.99219
+      value: 19.877478
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3936335155840365295, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_Name
+      value: RollerBallBot
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 753ea9ccf9eee6c42a0954ec8663b992, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 24e8963f005af9643aaec5dbce09347b, type: 3}
+--- !u!1001 &364645864
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 32.20373
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.49921805
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 50.936638
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155840365295, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_Name
+      value: RollerBallBot (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24e8963f005af9643aaec5dbce09347b, type: 3}
 --- !u!1001 &481628712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -293,7 +489,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: fefaeeb78b19c486190e186560fbe810,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fefaeeb78b19c486190e186560fbe810,
         type: 3}
@@ -347,6 +543,144 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8460998808371163196, guid: fefaeeb78b19c486190e186560fbe810, type: 3}
+--- !u!1001 &496712977
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 47.06508
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.24921805
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -29.585337
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155840365295, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_Name
+      value: RollerBallBot (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24e8963f005af9643aaec5dbce09347b, type: 3}
+--- !u!1001 &1005335424
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5603051555829351406, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_Name
+      value: RollerBallPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555829784526, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.307503
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555829784526, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3470656
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555829784526, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.7887383
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555829784526, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555829784526, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555829784526, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555829784526, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555829784526, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555829784526, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555829784526, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603051555829784526, guid: daabf9ec4043bd441bfc66c817cb6165,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: daabf9ec4043bd441bfc66c817cb6165, type: 3}
 --- !u!1001 &1016714443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -388,7 +722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -405,7 +739,7 @@ PrefabInstance:
     - target: {fileID: 11400000, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 3}
       propertyPath: m_Target
       value: 
-      objectReference: {fileID: 2086675635}
+      objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 3}
       propertyPath: m_MoveSpeed
       value: 10
@@ -420,6 +754,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 3}
+--- !u!1001 &1123947805
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -36.97207
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.9968805
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -42.232956
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155840365295, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_Name
+      value: RollerBallBot (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24e8963f005af9643aaec5dbce09347b, type: 3}
 --- !u!1 &1203391642
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,7 +947,7 @@ Transform:
   - {fileID: 1558337510}
   - {fileID: 81028156}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1558337508
 GameObject:
@@ -683,7 +1086,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ae99664e560284474be995b01a82f1dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ae99664e560284474be995b01a82f1dd,
         type: 3}
@@ -737,9 +1140,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae99664e560284474be995b01a82f1dd, type: 3}
---- !u!4 &2086675635 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 753ea9ccf9eee6c42a0954ec8663b992,
-    type: 3}
-  m_PrefabInstance: {fileID: 198135510}
-  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2070698171
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -38.86761
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.746614
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 40.63839
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155839938255, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936335155840365295, guid: 24e8963f005af9643aaec5dbce09347b,
+        type: 3}
+      propertyPath: m_Name
+      value: RollerBallBot (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24e8963f005af9643aaec5dbce09347b, type: 3}
