@@ -18,7 +18,7 @@ namespace DefaultNamespace
     private void Update()
     {
       CatScoreText.text = Player.Instance.GetComponent<CatPlacer>().CatsAttached.ToString() + " x";
-      DashCooldown.fillAmount = Player.Instance.GetComponent<BallSpeedUp>().Fill;
+      // DashCooldown.fillAmount = Player.Instance.GetComponent<BallSpeedUp>().Fill;
     }
   }
 }
