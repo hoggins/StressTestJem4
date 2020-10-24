@@ -2,7 +2,7 @@
 
 public class Player:MonoBehaviour
 {
-  public Player Instance;
+  public static Player Instance;
   
   void Awake()
   {
