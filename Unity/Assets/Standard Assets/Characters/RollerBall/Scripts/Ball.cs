@@ -5,7 +5,9 @@ namespace UnityStandardAssets.Vehicles.Ball
 {
     public class Ball : MonoBehaviour
     {
+      public float Fill => 1f - _jumpCooldownElapsed / 3f;
       [SerializeField] public AnimationCurve PowerCurveBySize;
+      [SerializeField] public AnimationCurve PowerJumpCurveBySize;
         [SerializeField] public float m_MovePower = 5; // The force added to the ball to move it.
         [SerializeField] public float m_bonusMult = 1;
         [SerializeField] public float m_MovePowerBonus = 0;
@@ -19,12 +21,14 @@ namespace UnityStandardAssets.Vehicles.Ball
         private Rigidbody m_Rigidbody;
         private SphereCollider _collider;
 
+        private float _jumpCooldownElapsed;
+        private bool _appliedJump;
+
 
         private void Start()
         {
             m_Rigidbody = GetComponent<Rigidbody>();
             _collider = GetComponent<SphereCollider>();
-            // Set the maximum angular velocity.
             GetComponent<Rigidbody>().maxAngularVelocity = m_MaxAngularVelocity;
         }
 
@@ -33,26 +37,34 @@ namespace UnityStandardAssets.Vehicles.Ball
         {
           var power = PowerCurveBySize.Evaluate(_collider.radius);
           var powerWithBonus = (power + m_MovePowerBonus) * m_bonusMult;
-            // If using torque to rotate the ball...
             if (m_UseTorque)
             {
-                // ... add torque around the axis defined by the move direction.
                 m_Rigidbody.AddTorque(new Vector3(moveDirection.z, 0, -moveDirection.x)*powerWithBonus*m_TorgueBonus);
             }
             else
             {
-                // Otherwise add force in the move direction.
                 m_Rigidbody.AddForce(moveDirection*powerWithBonus);
             }
             
             if(m_MoveRunBonus > 1)
                 m_Rigidbody.AddForce(moveDirection*m_MoveRunBonus);
 
+            _jumpCooldownElapsed -= Time.fixedDeltaTime;
+            
             // If on the ground and jump is pressed...
-            if (Physics.Raycast(transform.position, -Vector3.up, k_GroundRayLength) && jump)
+            if (Physics.Raycast(transform.position, -Vector3.up, k_GroundRayLength - 0.62f + _collider.radius) && jump && _jumpCooldownElapsed < 0f && !_appliedJump)
             {
                 // ... add force in upwards.
-                m_Rigidbody.AddForce(Vector3.up*m_JumpPower, ForceMode.Impulse);
+                m_Rigidbody.AddForce(Vector3.up*m_JumpPower, ForceMode.VelocityChange);
+                _appliedJump = true;
+            }
+            else
+            {
+              if (_appliedJump)
+              {
+                _jumpCooldownElapsed = 3f;
+                _appliedJump = false;
+              }
             }
         }
     }

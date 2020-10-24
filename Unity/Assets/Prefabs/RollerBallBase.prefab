@@ -114,6 +114,39 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  PowerJumpCurveBySize:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0.0009640503
+      outSlope: 0.0009640503
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.30864197
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: 2
+      inSlope: 0.4
+      outSlope: 0.4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   m_MovePower: 5
   m_bonusMult: 1
   m_MovePowerBonus: 0
@@ -121,7 +154,7 @@ MonoBehaviour:
   m_TorgueBonus: 1
   m_UseTorque: 1
   m_MaxAngularVelocity: 25
-  m_JumpPower: 4
+  m_JumpPower: 9
 --- !u!114 &2414288406005869178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,10 +220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65983d17711d4df08801a870494440b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedDuration: 1.5
-  SpeedCooldown: 8
-  SpeedMult: 22
-  TorgueBonus: 4
   KillBonus: 4
 --- !u!1 &4392023663900246565
 GameObject:

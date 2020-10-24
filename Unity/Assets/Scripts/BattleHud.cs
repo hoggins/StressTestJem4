@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Vehicles.Ball;
 
 namespace DefaultNamespace
 {
@@ -17,8 +18,14 @@ namespace DefaultNamespace
 
     private void Update()
     {
-      CatScoreText.text = Player.Instance.GetComponent<CatPlacer>().CatsAttached.ToString() + " x";
-      // DashCooldown.fillAmount = Player.Instance.GetComponent<BallSpeedUp>().Fill;
+      var catPlacer = Player.Instance.GetComponent<CatPlacer>();
+      CatScoreText.text = catPlacer.CatsAttached.ToString() + " x";
+      
+      var ballSpeedUp = Player.Instance.GetComponent<BallSpeedUp>();
+      DashCooldown.fillAmount = ballSpeedUp.Fill;
+      
+      var component = Player.Instance.GetComponent<Ball>();
+      JumpCooldown.fillAmount = component.Fill;
     }
   }
 }
