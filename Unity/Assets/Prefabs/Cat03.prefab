@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cat03
       objectReference: {fileID: 0}
+    - target: {fileID: 535946751894229680, guid: 58fb24c1d965d6840878113538df1aee,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 062d399fc61af41898c7a503128722e6, type: 2}
     - target: {fileID: 535946751894229681, guid: 58fb24c1d965d6840878113538df1aee,
         type: 3}
       propertyPath: m_Size.x
