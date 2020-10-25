@@ -1,6 +1,7 @@
 ﻿using System;
 using Controllers;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 
 public class Player:MonoBehaviour
@@ -45,6 +46,12 @@ public class Player:MonoBehaviour
     if (Input.GetKeyDown(KeyCode.T))
     {
       Instance.GetComponent<CatPlacer>().AddLayer(4);
+    }
+
+    if (Input.GetKeyDown(KeyCode.P))
+    {
+      var postProcessVolume = CameraMain.Instance.Cam.GetComponent<PostProcessVolume>();
+      postProcessVolume.enabled = !postProcessVolume.enabled;
     }
 
     var speed = Rigidbody.velocity.magnitude;
