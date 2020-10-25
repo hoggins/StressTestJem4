@@ -91,6 +91,9 @@ namespace DefaultNamespace
       if (toDetach == 0)
         return;
 
+      collision.gameObject.GetComponent<ScoreAggregator>()
+        .TrackClearedCat(toDetach);
+
       var contact = collision.GetContact(0);
 
       var cats = _placer.DrainCats(contact.point, toDetach);

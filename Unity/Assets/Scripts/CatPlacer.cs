@@ -6,6 +6,7 @@ using System.Linq;
 using Controllers;
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -36,12 +37,14 @@ public class CatPlacer : MonoBehaviour
 
   private Dictionary<GameObject, Coroutine> _attachingCatsCoroutines = new Dictionary<GameObject, Coroutine>();
   private AudioRollerPlayer _audio;
+  private ScoreAggregator _score;
 
 
   private void Awake()
   {
     Collider = GetComponent<SphereCollider>();
     _audio = GetComponent<AudioRollerPlayer>();
+    _score = GetComponent<ScoreAggregator>();
   }
 
   void Start()
@@ -92,6 +95,8 @@ public class CatPlacer : MonoBehaviour
       _audio.LastHitEnemyTime = Time.time;
       AudioController.Instance.PlayPickCat(_audio.DefaultSource);
     }
+
+    _score.TrackTakenCat();
 
     var freeLevel = _freePointsByLevel.FirstOrDefault(x => x.Count > 0);
     if (freeLevel == null)

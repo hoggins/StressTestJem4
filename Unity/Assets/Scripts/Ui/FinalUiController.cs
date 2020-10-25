@@ -17,9 +17,9 @@ public class FinalUiController : MonoBehaviour
 
   void Start()
   {
-    const int targetCollect = 132;
-    const int targetCleared = 326;
-    var targetTime = new TimeSpan(0,0,4,52);
+    var targetCollect = Program.Score.Taken;
+    var targetCleared = Program.Score.Cleared;
+    var targetTime = TimeSpan.FromSeconds(Program.Score.TotalSeconds);
 
     StartCoroutine(AnimateTextNumber(targetCollect, CollectText, 2));
     StartCoroutine(AnimateTextNumber(targetCleared, ClearedText, 2));

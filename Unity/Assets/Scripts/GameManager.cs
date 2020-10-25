@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Diagnostics;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.Cameras;
 
 public class GameManager:MonoBehaviour
@@ -17,13 +18,16 @@ public class GameManager:MonoBehaviour
 
   public WinState CurrentWinState = WinState.None;
   public int WinScore = 30;
-  
-  
+
+
   public static readonly HashSet<CatControl> AliveNearPlayer = new HashSet<CatControl>();
-  
+
   void Awake()
   {
     Instance = this;
+
+    Program.Score = new GameScore();
+    Program.Score.StartSecond = Time.time;
   }
 
   private void Update()
@@ -36,14 +40,22 @@ public class GameManager:MonoBehaviour
         AliveNearPlayer.Add(aliveCat);
       }
     }
-    
+
+    if (Input.GetKeyDown(KeyCode.V))
+      CompleteGame();
+  }
+
+  private static void CompleteGame()
+  {
+    Program.Score.TotalSeconds = Time.time - Program.Score.StartSecond;
+    SceneManager.LoadScene(UnityContract.SceneFinalMenu, LoadSceneMode.Single);
   }
 
   public void Win()
   {
     if(CurrentWinState != WinState.None)
       return;
-    
+
     CurrentWinState = WinState.Win;
     Debug.Log("WIN");
   }
@@ -52,7 +64,7 @@ public class GameManager:MonoBehaviour
   {
     if(CurrentWinState != WinState.None)
       return;
-    
+
     CurrentWinState = WinState.Lose;
     Debug.Log("LOSE");
   }

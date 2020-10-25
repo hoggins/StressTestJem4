@@ -10,9 +10,20 @@ public static class UnityContract
   public const string SceneGame = "Scenes/RollEnvironment01";
 }
 
+public class GameScore
+{
+  public int Taken { get; set; }
+  public int Cleared { get; set; }
+  public float StartSecond { get; set; }
+  public float TotalSeconds { get; set; }
+}
+
 public class Program : MonoBehaviour
 {
   public static Program Instance { get; private set; }
+
+  public static GameScore Score = new GameScore();
+
   private void Awake()
   {
     if (Instance != null)

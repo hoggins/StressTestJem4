@@ -9,18 +9,18 @@ namespace DefaultNamespace
   public class BattleHud : MonoBehaviour
   {
     public static BattleHud Instance;
-    
+
     public Text CatScoreText;
     public Text EnemyBestScoreText;
 
     public Transform EnemyScoreRoot;
     public Transform ScoreRoot;
-    
+
     public Image DashCooldown;
     public Image JumpCooldown;
-    
-    
-    
+
+
+
     private CatPlacer[] _botPlacers;
 
     private float _elapsedScale = 0f;
@@ -41,10 +41,10 @@ namespace DefaultNamespace
 
       var maxCats = _botPlacers.Max(x => x.CatsAttached);
       EnemyBestScoreText.text = maxCats + " / " + GameManager.Instance.WinScore;
-      
+
       var ballSpeedUp = Player.Instance.GetComponent<BallSpeedUp>();
       DashCooldown.fillAmount = ballSpeedUp.Fill;
-      
+
       var component = Player.Instance.GetComponent<Ball>();
       JumpCooldown.fillAmount = component.Fill;
 
@@ -61,7 +61,7 @@ namespace DefaultNamespace
           Vector3.Lerp(EnemyScoreRoot.transform.localScale, new Vector3(1, 1, 1), Time.deltaTime);
         _elapsedScale = 0;
       }
-      
+
       if (catPlacerCatsAttached >= GameManager.Instance.WinScore)
       {
         _elapsedScale2 += Time.deltaTime * 3f;
