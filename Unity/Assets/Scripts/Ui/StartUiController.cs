@@ -7,6 +7,9 @@ public class StartUiController : MonoBehaviour
 {
   public IntroPlayController IntroController;
 
+  public GameObject MainMenu;
+  public GameObject HelpMenu;
+
   public void OnPlayClick()
   {
     IntroController.PlayAndGo(()=>gameObject.SetActive(false));
@@ -25,5 +28,17 @@ public class StartUiController : MonoBehaviour
   public void OnSoundClick()
   {
     AudioListener.pause = !AudioListener.pause;
+  }
+
+  public void HelpClick()
+  {
+    MainMenu.SetActive(false);
+    HelpMenu.SetActive(true);
+  }
+
+  public void HelpCloseClick()
+  {
+    MainMenu.SetActive(true);
+    HelpMenu.SetActive(false);
   }
 }
