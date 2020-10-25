@@ -77,7 +77,7 @@ namespace DefaultNamespace
       toDetach *= ballSpeedUp.IsDashing ? ballSpeedUp.KillBonus : 1;
 
       if (isPlayer)
-        CameraMain.Instance.Shaker.ShakeOnce(11.0f, 3.0f, 0, 1.2f);
+        CameraMain.Instance.Shaker.ShakeOnce(Mathf.Min(force, 13f), 3.0f, 0, 1.2f);
 
       if (GetComponent<BallSpeedUp>().IsDashing)
         toDetach = 0;
