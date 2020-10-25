@@ -104,7 +104,7 @@ public class Portal : MonoBehaviour
     AudioController.Instance.PlayPortalClose(ExplAudioSource);
     
     IsActive = false;
-    PortalFxRoot.gameObject.SetActive(true);
+    PortalFxRoot.gameObject.SetActive(false);
     
     foreach (var particles in Fx.GetComponentsInChildren<ParticleSystem>())
     {

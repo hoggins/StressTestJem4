@@ -117,7 +117,7 @@ public class BallBotControl : MonoBehaviour
   
   private void OnTriggerEnter(Collider other)
   {
-    if (other.gameObject.CompareTag("WinTrigger"))
+    if (other.gameObject.CompareTag("WinTrigger") && GetComponent<CatPlacer>().CatsAttached >= GameManager.Instance.WinScore)
     {
       GameManager.Instance.Lose();
     }

@@ -21,16 +21,18 @@ namespace BotStates
     public override void Update()
     {
       base.Update();
+      
+      if (!CanSelect())
+      {
+        Finish = true;
+        return;
+      }
+
       Move = -(Control.Rigidbody.position - Control.Agent.nextPosition).normalized;
     }
 
     public override bool CanSelect()
     {
-      if(Control.CatPlacer == null)
-        Debug.LogError("1");
-      
-      if(GameManager.Instance == null)
-        Debug.LogError("2");
       return Control.CatPlacer.CatsAttached >= GameManager.Instance.WinScore;
     }
   }
