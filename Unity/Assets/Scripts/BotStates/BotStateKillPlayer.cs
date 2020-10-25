@@ -33,7 +33,8 @@ namespace BotStates
     {
       _elapsed += Time.deltaTime;
       
-      var targetPlayerPosition = Player.Instance.transform.position;
+      // var targetPlayerPosition = Player.Instance.transform.position;
+      var targetPlayerPosition = GetTargetPositionWithPrediction();
       
       Debug.DrawLine(Control.transform.position, targetPlayerPosition, Color.red, 0f, false);
       Move = -(Control.Rigidbody.position - targetPlayerPosition).normalized;

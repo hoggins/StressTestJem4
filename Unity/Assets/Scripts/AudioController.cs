@@ -17,6 +17,7 @@ namespace Controllers
     
     public AudioClip PortalOpen;
     public AudioClip PortalClose;
+    public AudioClip BonusSound;
 
     // public AudioSource Player;
     // public AudioSource PlayerRails;
@@ -62,6 +63,11 @@ namespace Controllers
     public void PlayDash(AudioSource audioSource)
     {
       audioSource.PlayOneShot(Dash);
+    }
+    
+    public void PlayBonus(AudioSource audioSource)
+    {
+      audioSource.PlayOneShot(BonusSound);
     }
     
     

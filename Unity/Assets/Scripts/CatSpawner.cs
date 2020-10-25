@@ -27,7 +27,7 @@ namespace DefaultNamespace
             continue;
 
           var cat = CatFactory.Instance.MakeCat();
-          cat.transform.position = position.Value + new Vector3(0, 0.5f, 0);
+          cat.transform.position = position.Value + new Vector3(0, 0.75f, 0);
 
           const float power = 10f;
           cat.GetComponent<Rigidbody>().velocity =

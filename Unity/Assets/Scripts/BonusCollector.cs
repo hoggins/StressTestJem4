@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Controllers;
 using DefaultNamespace.Bonuses;
 using UnityEngine;
 using UnityStandardAssets.Vehicles.Ball;
@@ -28,6 +29,8 @@ public class BonusCollector : MonoBehaviour
   public int KillBonus = 1;
   [NonSerialized]
   public int DoubleBonus = 1;
+
+  public AudioSource SOurce;
 
   void Awake()
   {
@@ -59,6 +62,8 @@ public class BonusCollector : MonoBehaviour
       _doubleCoroutine = StartCoroutine(StartDoubleBonus());
       
       Collect(other);
+      
+      AudioController.Instance.PlayBonus(SOurce);
     }
     // else if (other.CompareTag("KillBonus"))
     // {
