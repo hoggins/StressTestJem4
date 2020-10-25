@@ -181,7 +181,7 @@ MonoBehaviour:
   PortalFxRoot: {fileID: 6395605009760204383}
   LoopAudioSource: {fileID: 7877598098270748133}
   ExplAudioSource: {fileID: 3691673535211925998}
-  Distance: 200
+  Distance: 250
   Power: 2500
   IsActive: 0
 --- !u!82 &7877598098270748133
