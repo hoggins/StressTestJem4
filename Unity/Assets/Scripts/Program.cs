@@ -25,6 +25,7 @@ public class Program : MonoBehaviour
     DontDestroyOnLoad(this);
 
     Application.targetFrameRate = 30;
+    //Screen.SetResolution(1980,1080, FullScreenMode.ExclusiveFullScreen);
   }
 
   // Start is called before the first frame update
