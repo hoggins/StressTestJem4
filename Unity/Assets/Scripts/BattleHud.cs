@@ -51,7 +51,7 @@ namespace DefaultNamespace
       if (maxCats >= GameManager.Instance.WinScore)
       {
         _elapsedScale += Time.deltaTime * 3;
-        var sin = Mathf.Abs(Mathf.Sin(_elapsedScale));
+        var sin = 1f + Mathf.Abs( Mathf.Sin(_elapsedScale))*0.25f;
         EnemyScoreRoot.transform.localScale = Vector3.Lerp(EnemyScoreRoot.transform.localScale,
           new Vector3(sin, sin, sin), Time.deltaTime*3f);
       }
@@ -65,7 +65,7 @@ namespace DefaultNamespace
       if (catPlacerCatsAttached >= GameManager.Instance.WinScore)
       {
         _elapsedScale2 += Time.deltaTime * 3f;
-        var sin = Mathf.Abs(Mathf.Sin(_elapsedScale2));
+        var sin = 1f + Mathf.Abs(Mathf.Sin(_elapsedScale2)) * 0.25f;
         CatScoreText.transform.localScale = Vector3.Lerp(CatScoreText.transform.localScale,
           new Vector3(sin, sin, sin), Time.deltaTime*3f);
       }
