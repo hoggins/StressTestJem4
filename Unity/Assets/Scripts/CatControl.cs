@@ -104,12 +104,12 @@ public class CatControl : MonoBehaviour
   }
 
 
-  public static CatControl GetClosestNearPlayer(Vector3 position, bool nearPlayerPosition)
+  public static CatControl GetClosestNearPlayer(Vector3 position, bool nearPlayerPosition, Vector3 posOffset)
   {
     var minDist = float.MaxValue;
     CatControl resultCat = null;
 
-    var playerPOs = Player.Instance.transform.position + Player.Instance.Rigidbody.velocity * 4;
+    var playerPOs = Player.Instance.transform.position + Player.Instance.Rigidbody.velocity * 3 + posOffset;
     if (!nearPlayerPosition)
       playerPOs = position;
     

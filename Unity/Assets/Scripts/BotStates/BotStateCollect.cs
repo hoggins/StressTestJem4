@@ -18,8 +18,8 @@ namespace BotStates
     public override void OnEnter()
     {
       base.OnEnter();
-      NearPlayer = Random.Range(0, 1) > 0.2f;
-      CloseToMe = Random.Range(0, 1) > 0.8f;
+      NearPlayer = Random.Range(0, 1f) > 0.2f;
+      CloseToMe = Random.Range(0, 1f) > 0.5f;
       PosOffset = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
     }
 
@@ -29,7 +29,7 @@ namespace BotStates
       var rigidbodyPosition = Control.Rigidbody.position;
       var closest = CloseToMe
         ? CatControl.GetClosest(rigidbodyPosition)
-        : CatControl.GetClosestNearPlayer(rigidbodyPosition, NearPlayer);
+        : CatControl.GetClosestNearPlayer(rigidbodyPosition, NearPlayer, PosOffset);
       if (closest == null)
       {
         Finish = true;
@@ -38,7 +38,7 @@ namespace BotStates
 
       Move = -(Control.Rigidbody.position - Control.Agent.nextPosition).normalized;
       Control.Agent.SetDestination(closest.transform.position);
-      Debug.DrawLine(Control.Rigidbody.position, closest.transform.position, Color.blue, 0, false);
+      Debug.DrawLine(Control.Rigidbody.position, closest.transform.position, NearPlayer && !CloseToMe ? Color.magenta : Color.blue, 0, false);
     }
 
     public override bool CanSelect()
