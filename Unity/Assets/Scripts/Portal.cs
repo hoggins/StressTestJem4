@@ -34,6 +34,8 @@ public class Portal : MonoBehaviour
   {
     if(IsActive)
       return;
+    
+    CameraMain.Instance.Shaker.ShakeOnce(15f, 3.0f, 0, 3.2f);
 
     PortalFxRoot.gameObject.SetActive(true);
     
