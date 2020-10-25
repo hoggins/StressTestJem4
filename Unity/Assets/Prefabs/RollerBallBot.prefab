@@ -153,6 +153,11 @@ PrefabInstance:
       propertyPath: PowerCurveBySize.m_Curve.Array.data[0].value
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 13500000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 0397bacc5f39f40ca9f0359a83c16722,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
 --- !u!1 &3936335155840365295 stripped
