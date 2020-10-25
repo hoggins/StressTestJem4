@@ -19,7 +19,10 @@ namespace DefaultNamespace
     public Image JumpCooldown;
 
 
-
+    public Image EndImage;
+    public Text EndText;
+    
+    
     private CatPlacer[] _botPlacers;
 
     private float _elapsedScale = 0f;
@@ -83,6 +86,27 @@ namespace DefaultNamespace
       else
       {
         Portal.Instance.Deactivate();
+      }
+
+      if (GameManager.Instance.CurrentWinState != GameManager.WinState.None)
+      {
+        var c = EndImage.color;
+        c.a = Mathf.Lerp(c.a, 1f, Time.deltaTime*10f);
+        EndImage.color = c;
+
+        var c2 = EndText.color;
+        var canHideUi = GameManager.Instance.CanHideUi;
+        c2.a = Mathf.Lerp(c2.a, canHideUi ? 0f : 1f, Time.deltaTime*(canHideUi ? 10f : 1.5f));
+        EndText.color = c2;
+      }
+
+      if (GameManager.Instance.CurrentWinState == GameManager.WinState.Win)
+      {
+        EndText.text = "Победа!";
+      }
+      else if (GameManager.Instance.CurrentWinState == GameManager.WinState.Lose)
+      {
+        EndText.text = "Сосиски сожрали другие коты...";
       }
     }
   }
