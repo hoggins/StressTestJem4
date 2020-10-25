@@ -85,7 +85,7 @@ public class BallBotControl : MonoBehaviour
 
     if (Vector3.Distance(transform.position, Player.Instance.transform.position) > 80)
     {
-      Ball.m_botFarBonus = 2;
+      Ball.m_botFarBonus = 3;
     }
     else
     {
