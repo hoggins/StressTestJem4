@@ -17,6 +17,11 @@ namespace BotStates
       Control = control;
     }
 
+    public virtual void UpdateChanceToSelect()
+    {
+      
+    }
+
     public virtual bool CanSelect()
     {
       return Random.Range(0, 1f) < ChanceToSelect;

@@ -8,10 +8,10 @@ namespace UnityStandardAssets.Vehicles.Ball
       public float Fill => 1f - _jumpCooldownElapsed / 3f;
       [SerializeField] public AnimationCurve PowerCurveBySize;
       [SerializeField] public AnimationCurve PowerJumpCurveBySize;
-        [SerializeField] public float m_MovePower = 5; // The force added to the ball to move it.
         [SerializeField] public float m_bonusMult = 1;
         [SerializeField] public float m_MovePowerBonus = 0;
         [SerializeField] public float m_MoveRunBonus = 1;
+        [SerializeField] public float m_botFarBonus = 1;
         [SerializeField] public float m_TorgueBonus = 1;
         [SerializeField] public bool m_UseTorque = true; // Whether or not to use torque to move the ball.
         [SerializeField] public float m_MaxAngularVelocity = 25; // The maximum velocity the ball can rotate at.
@@ -36,7 +36,7 @@ namespace UnityStandardAssets.Vehicles.Ball
         public void Move(Vector3 moveDirection, bool jump)
         {
           var power = PowerCurveBySize.Evaluate(_collider.radius);
-          var powerWithBonus = (power + m_MovePowerBonus) * m_bonusMult;
+          var powerWithBonus = (power + m_MovePowerBonus) * m_bonusMult * m_botFarBonus;
             if (m_UseTorque)
             {
                 m_Rigidbody.AddTorque(new Vector3(moveDirection.z, 0, -moveDirection.x)*powerWithBonus*m_TorgueBonus);

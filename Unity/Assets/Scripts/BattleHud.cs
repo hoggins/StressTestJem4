@@ -23,7 +23,7 @@ namespace DefaultNamespace
     {
       Instance = this;
 
-      _botPlacers = FindObjectsOfType<CatPlacer>();
+      _botPlacers = FindObjectsOfType<CatPlacer>().Where(x => x.GetComponent<Player>() == null).ToArray();
     }
 
     private void Update()

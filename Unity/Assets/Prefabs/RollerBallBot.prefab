@@ -105,6 +105,54 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: m_MaxAngularVelocity
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: m_MovePower
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: PowerCurveBySize.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: PowerCurveBySize.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: PowerCurveBySize.m_Curve.Array.data[1].value
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: PowerCurveBySize.m_Curve.Array.data[2].inSlope
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: PowerCurveBySize.m_Curve.Array.data[2].outSlope
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: PowerCurveBySize.m_Curve.Array.data[2].value
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: PowerCurveBySize.m_Curve.Array.data[1].inSlope
+      value: 3.1478524
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: PowerCurveBySize.m_Curve.Array.data[1].outSlope
+      value: 3.1478524
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: PowerCurveBySize.m_Curve.Array.data[1].outWeight
+      value: 0.061728407
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
+      propertyPath: PowerCurveBySize.m_Curve.Array.data[0].value
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ba95912fbbe9704cabe5ee9dc02c522, type: 3}
 --- !u!1 &3936335155840365295 stripped

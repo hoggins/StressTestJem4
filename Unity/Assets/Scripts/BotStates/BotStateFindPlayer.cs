@@ -11,6 +11,13 @@ namespace BotStates
       StateDurationRandom = 5f;
       ChanceToSelect = 0.40f;
     }
+    
+    
+    public override void UpdateChanceToSelect()
+    {
+      var t = (float)Player.Instance.GetComponent<CatPlacer>().CatsAttached / (float)GameManager.Instance.WinScore;
+      ChanceToSelect = Mathf.Lerp(0.0f, 0.6f, t);
+    }
 
     public override void Update()
     {

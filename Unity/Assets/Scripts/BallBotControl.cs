@@ -83,6 +83,19 @@ public class BallBotControl : MonoBehaviour
   {
     _currentState.Update();
 
+    if (Vector3.Distance(transform.position, Player.Instance.transform.position) > 80)
+    {
+      Ball.m_botFarBonus = 2;
+    }
+    else
+    {
+      Ball.m_botFarBonus = 1;
+    }
+
+    foreach (var state in _allStates)
+    {
+      state.UpdateChanceToSelect();
+    }
   }
 
   private void LateUpdate()

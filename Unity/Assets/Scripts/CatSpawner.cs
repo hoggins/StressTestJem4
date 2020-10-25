@@ -16,31 +16,33 @@ namespace DefaultNamespace
 
     IEnumerator SpawnRoutine()
     {
+    var firstSpawn = true;
       while (true)
       {
         for (int i = CatControl.AliveCats.Count; i < TargetAliveCatCount; i++)
         {
-          var position = GetTargetSpawnPosition();
+          var position = GetTargetSpawnPosition(firstSpawn);
 
           if(position == null)
             continue;
 
-
           var cat = CatFactory.Instance.MakeCat();
-          cat.transform.position = position.Value + new Vector3(0, 1, 0);
+          cat.transform.position = position.Value + new Vector3(0, 0.5f, 0);
 
           const float power = 10f;
           cat.GetComponent<Rigidbody>().velocity =
             new Vector3(Random.Range(0, power), Random.Range(0, power), Random.Range(0, power));
 
-          yield return null;
+          if(!firstSpawn)
+            yield return null;
         }
-        
+
+        firstSpawn = false;
         yield return new WaitForSeconds(1.0f);
       }
     }
 
-    private static Vector3? GetTargetSpawnPosition()
+    private static Vector3? GetTargetSpawnPosition(bool firstSpawn)
     {
       var retries = 10;
       Vector3? targetPosition = null; 
@@ -61,15 +63,35 @@ namespace DefaultNamespace
         if (NavMesh.SamplePosition(result, out var hit, 10, int.MaxValue))
         {
           var viewportPoint = Camera.main.WorldToViewportPoint(hit.position);
-          if (viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1 &&
-              viewportPoint.z > 0)
+          var camPosition = CameraMain.Instance.Cam.transform.position;
+          var dirToPOint = (hit.position - camPosition);
+          var distgance = dirToPOint.magnitude;
+          dirToPOint.Normalize();
+
+          var inViewport = viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1 &&
+                  viewportPoint.z > 0;
+          var visible = !Physics.Raycast(new Ray(camPosition, dirToPOint), out var hit2, distgance, int.MaxValue);
+          if (!visible)
+          {
+            if (hit2.collider.CompareTag("Player") || hit2.collider.CompareTag("Bot"))
+            {
+              visible = true;
+            }
+          }
+
+          if (inViewport && visible && !firstSpawn)
           {
             retries--;
             continue;
           }
           else
           {
-            
+            if (inViewport)
+            {
+              // Debug.DrawLine(camPosition, camPosition + dirToPOint * distgance, Color.cyan, 5.0f, false);
+              // Debug.DrawLine(camPosition + Vector3.up*0.05f, hit2.point + Vector3.up*0.05f, Color.red, 5.0f, false);
+            }
+
             targetPosition = hit.position;
             break;
           }
