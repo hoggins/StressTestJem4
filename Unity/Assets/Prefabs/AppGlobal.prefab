@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitEnemy:
-  - {fileID: 8300000, guid: c99978f38ec3547429cafef6844a816a, type: 3}
   - {fileID: 8300000, guid: 30b0d01b752b0774f891c9a53a905df3, type: 3}
   - {fileID: 8300000, guid: e9587d5b5c6fd8d4994f427a9c55f655, type: 3}
   - {fileID: 8300000, guid: fef92edb93148d748930eee39e255ac1, type: 3}
