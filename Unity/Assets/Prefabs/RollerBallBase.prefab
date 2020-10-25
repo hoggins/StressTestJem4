@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5432752203118782470}
   - component: {fileID: 1295344728472497084}
   - component: {fileID: 2448678774734754967}
+  - component: {fileID: 6153857165975614090}
   m_Layer: 8
   m_Name: RollerBallBase
   m_TagString: Untagged
@@ -334,6 +335,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6153857165975614090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd63a0e13d0420688bbc7cb0b555823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1664052405779524424
 GameObject:
   m_ObjectHideFlags: 0
