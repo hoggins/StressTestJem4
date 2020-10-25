@@ -51,6 +51,7 @@ MonoBehaviour:
   Fx: {fileID: 2776777053088100581}
   Root: {fileID: 6846188596479319689}
   ExplPosition: {fileID: 5650799622763569447}
+  PortalFxRoot: {fileID: 6395605009760204383}
   Distance: 200
   Power: 2500
   IsActive: 0
