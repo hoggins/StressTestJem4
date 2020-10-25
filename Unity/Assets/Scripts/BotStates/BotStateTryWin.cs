@@ -1,4 +1,6 @@
-﻿namespace BotStates
+﻿using UnityEngine;
+
+namespace BotStates
 {
   public class BotStateTryWin : BotStateBase
   {
@@ -24,6 +26,11 @@
 
     public override bool CanSelect()
     {
+      if(Control.CatPlacer == null)
+        Debug.LogError("1");
+      
+      if(GameManager.Instance == null)
+        Debug.LogError("2");
       return Control.CatPlacer.CatsAttached >= GameManager.Instance.WinScore;
     }
   }
