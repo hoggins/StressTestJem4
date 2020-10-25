@@ -18,7 +18,7 @@ namespace BotStates
     public override void OnEnter()
     {
       base.OnEnter();
-      NearPlayer = Random.Range(0, 1f) > 0.2f;
+      NearPlayer = Random.Range(0, 1f) > 0.35f;
       CloseToMe = Random.Range(0, 1f) > 0.5f;
       PosOffset = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
     }
