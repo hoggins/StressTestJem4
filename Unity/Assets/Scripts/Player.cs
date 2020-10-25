@@ -7,15 +7,15 @@ public class Player:MonoBehaviour
 
   public float FovMin = 60;
   public float FovMax = 85;
-  
+
   [NonSerialized]
   public Rigidbody Rigidbody;
   [NonSerialized]
   public BallSpeedUp SpeedUp;
 
-  
-  
-  
+
+
+
   void Awake()
   {
     Instance = this;
@@ -26,7 +26,7 @@ public class Player:MonoBehaviour
 
   private void Update()
   {
-    
+
     if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
     {
       var forward = CameraMain.Instance.transform.forward;
@@ -35,6 +35,11 @@ public class Player:MonoBehaviour
     if(Input.GetKeyDown(KeyCode.F))
     {
       CameraMain.Instance.Shaker.ShakeOnce(11.0f, 3.0f, 0, 1.2f);
+    }
+
+    if (Input.GetKeyDown(KeyCode.T))
+    {
+      Instance.GetComponent<CatPlacer>().AddLayer(4);
     }
 
     var speed = Rigidbody.velocity.magnitude;

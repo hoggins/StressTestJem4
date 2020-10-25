@@ -165,7 +165,8 @@ public class CatPlacer : MonoBehaviour
     while (_freePointsByLevel.Count < layer || _freePointsByLevel.Last().Count > 0)
     {
       var go = CatFactory.Instance.MakeCat();
-      AttachCat(go);
+      go.transform.position = transform.position;
+      AttachCat(go, true);
     }
   }
 
