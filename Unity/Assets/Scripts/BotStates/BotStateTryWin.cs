@@ -5,7 +5,7 @@
     public BotStateTryWin(BallBotControl control)
       : base(control)
     {
-      ChanceToSelect = 0.9f;
+      ChanceToSelect = 1f;
       StateDuration = 20f;
       StateDurationRandom = 10f;
     }
@@ -24,7 +24,7 @@
 
     public override bool CanSelect()
     {
-      return Control.CatPlacer.CatsAttached > 50;
+      return Control.CatPlacer.CatsAttached >= GameManager.Instance.WinScore;
     }
   }
 }

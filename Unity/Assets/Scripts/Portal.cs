@@ -24,6 +24,7 @@ public class Portal : MonoBehaviour
     {
       particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
+    PortalFxRoot.gameObject.SetActive(false);
   }
 
   public void Active()
