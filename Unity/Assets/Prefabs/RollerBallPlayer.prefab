@@ -331,6 +331,20 @@ MonoBehaviour:
   DefaultSource: {fileID: 6159916634443124380}
   RailsSource: {fileID: 2311467508149641105}
   WallHitSource: {fileID: 5283781132924546319}
+--- !u!114 &3348221869007592358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603051555829351406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde2781272704d79bad31c10ccff41c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArrowPrefab: {fileID: 1304251885843289278, guid: e833a12774c8844058317d7f26cb3be1,
+    type: 3}
 --- !u!1001 &5603051555829384526
 PrefabInstance:
   m_ObjectHideFlags: 0
