@@ -7,7 +7,6 @@ public class Portal : MonoBehaviour
 {
   public static Portal Instance;
 
-  public GameObject Explosion;
   public GameObject Fx;
   public Transform Root;
   public Transform ExplPosition;
