@@ -70,6 +70,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9b1228eaf7d142d46866798441818cd7, type: 3}
   HitWall:
   - {fileID: 8300000, guid: 30b59462d45296848b5add5b4d879871, type: 3}
+  Dash: {fileID: 8300000, guid: e63323553b24c2649948de7c8468a187, type: 3}
+  Jump: {fileID: 8300000, guid: 42e193986c7c8df4a9e5a591d6dabe6b, type: 3}
+  PortalOpen: {fileID: 8300000, guid: 1703f6e2f676da141b039e42e4a72bd5, type: 3}
+  PortalClose: {fileID: 8300000, guid: efdd2f78971fc8b4b9de9c2702b7e35f, type: 3}
   Music: {fileID: 7380092251907186373}
   MusicMenu: {fileID: 0}
 --- !u!114 &279405897069861359

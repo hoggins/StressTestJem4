@@ -11,6 +11,12 @@ namespace Controllers
     public AudioClip[] HitEnemy;
     public AudioClip[] PickCat;
     public AudioClip[] HitWall;
+    
+    public AudioClip Dash;
+    public AudioClip Jump;
+    
+    public AudioClip PortalOpen;
+    public AudioClip PortalClose;
 
     // public AudioSource Player;
     // public AudioSource PlayerRails;
@@ -46,6 +52,27 @@ namespace Controllers
     public void PlayHitWall(AudioSource audioSource)
     {
       PlayRandom(audioSource, HitWall);
+    }
+
+    public void PlayJump(AudioSource audioSource)
+    {
+      audioSource.PlayOneShot(Jump);
+    }
+    
+    public void PlayDash(AudioSource audioSource)
+    {
+      audioSource.PlayOneShot(Dash);
+    }
+    
+    
+    public void PlayPortalOpen(AudioSource audioSource)
+    {
+      audioSource.PlayOneShot(PortalOpen);
+    }
+    
+    public void PlayPortalClose(AudioSource audioSource)
+    {
+      audioSource.PlayOneShot(PortalClose);
     }
 
     private Coroutine _musicCoroutine;

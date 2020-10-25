@@ -16,7 +16,7 @@ public class BallSpeedUp : MonoBehaviour
   {
     _rigidbody = GetComponent<Rigidbody>();
   }
-  public void Use(Vector3 forward)
+  public bool Use(Vector3 forward)
   {
     if (_dashCooldown < 0)
     {
@@ -27,7 +27,10 @@ public class BallSpeedUp : MonoBehaviour
       _rigidbody.AddForce(forward * 1300);
       _dashCooldown = 8;
       _dashingElased = 1f;
+      return true;
     }
+
+    return false;
   }
 
   private void Update()

@@ -1,4 +1,5 @@
 using System;
+using Controllers;
 using UnityEngine;
 
 namespace UnityStandardAssets.Vehicles.Ball
@@ -57,6 +58,7 @@ namespace UnityStandardAssets.Vehicles.Ball
                 // ... add force in upwards.
                 m_Rigidbody.AddForce(Vector3.up*m_JumpPower, ForceMode.VelocityChange);
                 _appliedJump = true;
+                AudioController.Instance.PlayJump(GetComponent<AudioSource>());
             }
             else
             {

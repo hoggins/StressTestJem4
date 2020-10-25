@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -11,6 +12,9 @@ public class Portal : MonoBehaviour
   public Transform Root;
   public Transform ExplPosition;
   public Transform PortalFxRoot;
+
+  public AudioSource LoopAudioSource;
+  public AudioSource ExplAudioSource;
 
   public float Distance = 200;
   public float Power = 2000;
@@ -34,6 +38,7 @@ public class Portal : MonoBehaviour
     PortalFxRoot.gameObject.SetActive(true);
     
     IsActive = true;
+    AudioController.Instance.PlayPortalOpen(ExplAudioSource);
     // var inst = GameObject.Instantiate(Explosion, Root.transform.position, Quaternion.identity);
     // Destroy(inst, 15);
     
@@ -96,6 +101,8 @@ public class Portal : MonoBehaviour
     if (!IsActive)
       return;
 
+    AudioController.Instance.PlayPortalClose(ExplAudioSource);
+    
     IsActive = false;
     PortalFxRoot.gameObject.SetActive(true);
     

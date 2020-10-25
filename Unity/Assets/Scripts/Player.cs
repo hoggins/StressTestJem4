@@ -1,4 +1,5 @@
 ﻿using System;
+using Controllers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -31,7 +32,10 @@ public class Player:MonoBehaviour
     if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
     {
       var forward = CameraMain.Instance.transform.forward;
-      SpeedUp.Use(forward);
+      if (SpeedUp.Use(forward))
+      {
+        AudioController.Instance.PlayDash(GetComponent<AudioSource>());
+      }
     }
     if(Input.GetKeyDown(KeyCode.F))
     {
@@ -49,9 +53,7 @@ public class Player:MonoBehaviour
 
   private void OnTriggerEnter(Collider other)
   {
-    if (other.gameObject.CompareTag("WinTrigger"))
-    {
+    if (other.gameObject.CompareTag("WinTrigger") && GetComponent<CatPlacer>().CatsAttached >= GameManager.Instance.WinScore)
       GameManager.Instance.Win();
-    }
   }
 }
