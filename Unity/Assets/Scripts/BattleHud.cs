@@ -27,6 +27,7 @@ namespace DefaultNamespace
 
     private float _elapsedScale = 0f;
     private float _elapsedScale2 = 0f;
+    private float _elapsedRot = 0f;
 
     private void Awake()
     {
@@ -90,6 +91,7 @@ namespace DefaultNamespace
 
       if (GameManager.Instance.CurrentWinState != GameManager.WinState.None)
       {
+        _elapsedRot += Time.deltaTime;
         var c = EndImage.color;
         c.a = Mathf.Lerp(c.a, 1f, Time.deltaTime*10f);
         EndImage.color = c;
@@ -100,7 +102,7 @@ namespace DefaultNamespace
         EndText.color = c2;
 
         var angle = EndText.transform.localEulerAngles;
-        EndText.transform.localEulerAngles = Vector3.Lerp(angle, new Vector3(0, 0, Mathf.Sin(Time.time*1) * 15), Time.deltaTime*3f);
+        EndText.transform.localEulerAngles = Vector3.Lerp(angle, new Vector3(0, 0, Mathf.Sin(_elapsedRot*2) * 15), Time.deltaTime*3f);
       }
 
       if (GameManager.Instance.CurrentWinState == GameManager.WinState.Win)

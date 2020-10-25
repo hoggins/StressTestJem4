@@ -11,6 +11,7 @@ public class Portal : MonoBehaviour
   public GameObject Fx;
   public Transform Root;
   public Transform ExplPosition;
+  public Transform PortalFxRoot;
 
   public float Distance = 200;
   public float Power = 2000;
@@ -30,6 +31,8 @@ public class Portal : MonoBehaviour
     if(IsActive)
       return;
 
+    PortalFxRoot.gameObject.SetActive(true);
+    
     IsActive = true;
     var inst = GameObject.Instantiate(Explosion, Root.transform.position, Quaternion.identity);
     Destroy(inst, 15);
@@ -94,6 +97,7 @@ public class Portal : MonoBehaviour
       return;
 
     IsActive = false;
+    PortalFxRoot.gameObject.SetActive(true);
     
     foreach (var particles in Fx.GetComponentsInChildren<ParticleSystem>())
     {
