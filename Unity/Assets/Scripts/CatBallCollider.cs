@@ -50,7 +50,9 @@ namespace DefaultNamespace
 
     void OnCollisionEnter(Collision collision)
     {
-      if (!collision.gameObject.CompareTag("Bot") && !collision.gameObject.CompareTag("Player"))
+      var isBot = collision.gameObject.CompareTag("Bot");
+      var isPlayer = collision.gameObject.CompareTag("Player");
+      if (!isBot && !isPlayer)
         return;
 
       var force = collision.impulse.magnitude;
@@ -73,6 +75,9 @@ namespace DefaultNamespace
 
       var ballSpeedUp = collision.gameObject.GetComponent<BallSpeedUp>();
       toDetach *= ballSpeedUp.IsDashing ? ballSpeedUp.KillBonus : 1;
+
+      if (isPlayer)
+        CameraMain.Instance.Shaker.ShakeOnce(11.0f, 3.0f, 0, 1.2f);
 
       if (GetComponent<BallSpeedUp>().IsDashing)
         toDetach = 0;

@@ -148,7 +148,7 @@ public class CatControl : MonoBehaviour
     AliveCats.Remove(this);
   }
 
-  private void OnDrawGizmos()
+  private void OnDrawGizmosSelected()
   {
     if(_currentState == null)
       return;

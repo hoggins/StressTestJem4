@@ -32,9 +32,13 @@ public class Player:MonoBehaviour
       var forward = CameraMain.Instance.transform.forward;
       SpeedUp.Use(forward);
     }
+    if(Input.GetKeyDown(KeyCode.F))
+    {
+      CameraMain.Instance.Shaker.ShakeOnce(11.0f, 3.0f, 0, 1.2f);
+    }
 
     var speed = Rigidbody.velocity.magnitude;
-    CameraMain.Instance.fieldOfView = Mathf.Lerp(CameraMain.Instance.fieldOfView, Mathf.Lerp(FovMin, FovMax, speed / 20), Time.deltaTime * 1f);
+    CameraMain.Instance.Cam.fieldOfView = Mathf.Lerp(CameraMain.Instance.Cam.fieldOfView, Mathf.Lerp(FovMin, FovMax, speed / 20), Time.deltaTime * 1f);
   }
 
   private void OnTriggerEnter(Collider other)
