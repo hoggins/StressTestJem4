@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Portal : MonoBehaviour
 {
@@ -52,6 +55,37 @@ public class Portal : MonoBehaviour
       
       rb.AddForce(direction * dp * Power);
     }
+
+    StartCoroutine(ChangeCameraSettings());
+  }
+
+  private IEnumerator ChangeCameraSettings()
+  {
+    var elapsed = 0f;
+    var volume  = CameraMain.Instance.GetComponent<PostProcessVolume>();
+
+    do
+    {
+      elapsed += Time.deltaTime;
+      yield return null;
+
+      var bloom = volume.profile.settings.Find(x => x is Bloom) as Bloom;
+      bloom.intensity.Interp(2, 8, elapsed / 0.3f);
+      bloom.threshold.Interp(0.75f, 0.5f, elapsed / 0.3f);
+    } while (elapsed < 0.3);
+    
+    // yield return new WaitForSeconds(1.0f);
+
+    elapsed = 0f;
+    do
+    {
+      elapsed += Time.deltaTime;
+      yield return null;
+
+      var bloom = volume.profile.settings.Find(x => x is Bloom) as Bloom;
+      bloom.intensity.Interp(8, 2, elapsed / 3f);
+      bloom.threshold.Interp(0.5f, 0.75f, elapsed / 3f);
+    } while (elapsed < 3f);
   }
 
   public void Deactivate()
