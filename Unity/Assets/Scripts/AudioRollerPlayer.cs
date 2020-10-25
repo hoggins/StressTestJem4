@@ -12,6 +12,7 @@ namespace DefaultNamespace
 
     public AudioSource DefaultSource;
     public AudioSource RailsSource;
+    public AudioSource WallHitSource;
 
     private bool IsPlayingRails;
     private Rigidbody _body;
@@ -41,10 +42,17 @@ namespace DefaultNamespace
       if ((_lastVel - newVel).magnitude > 2
           && timeSinceEnemyHit > 0.3)
       {
-        AudioController.Instance.PlayHitWall(DefaultSource);
+        PlayHitWall((_lastVel - newVel).magnitude);
         LastHitEnemyTime = Time.time;
       }
       _lastVel = newVel;
+    }
+
+    private void PlayHitWall(float impulse)
+    {
+      var volume = Mathf.Clamp(impulse / 8, 0.1f, 0.6f);
+      WallHitSource.volume = volume;
+      WallHitSource.Play();
     }
 
     private void UpdateRails()
