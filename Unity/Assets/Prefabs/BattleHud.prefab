@@ -659,6 +659,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CatScoreText: {fileID: 7517489762156995037}
   EnemyBestScoreText: {fileID: 1256488793}
+  EnemyScoreRoot: {fileID: 175870555}
+  ScoreRoot: {fileID: 8412259347388368720}
   DashCooldown: {fileID: 99822053}
   JumpCooldown: {fileID: 6616425817090314972}
 --- !u!1 &8077334273973778150

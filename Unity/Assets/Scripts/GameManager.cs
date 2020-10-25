@@ -36,6 +36,7 @@ public class GameManager:MonoBehaviour
         AliveNearPlayer.Add(aliveCat);
       }
     }
+    
   }
 
   public void Win()
