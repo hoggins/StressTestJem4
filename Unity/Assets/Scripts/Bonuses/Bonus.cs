@@ -8,12 +8,10 @@ namespace DefaultNamespace.Bonuses
   {
     public float RespawnDuration = 30f;
     private Collider _collider;
-    private Renderer _renderer;
 
     private void Awake()
     {
       _collider = GetComponent<Collider>();
-      _renderer = GetComponent<Renderer>();
     }
 
     public void WaitToRespawn()
@@ -23,7 +21,6 @@ namespace DefaultNamespace.Bonuses
       {
         renderer.enabled = false;
       }
-      _renderer.enabled = false;
       StartCoroutine(RespawnCoroutine());
     }
 

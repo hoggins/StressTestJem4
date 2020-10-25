@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Diagnostics;
@@ -42,7 +43,7 @@ public class GameManager:MonoBehaviour
     }
 
     if (Input.GetKeyDown(KeyCode.V))
-      CompleteGame();
+      Win();
   }
 
   private static void CompleteGame()
@@ -57,6 +58,7 @@ public class GameManager:MonoBehaviour
       return;
 
     CurrentWinState = WinState.Win;
+    StartCoroutine(EndCoroutine());
     Debug.Log("WIN");
   }
 
@@ -66,6 +68,20 @@ public class GameManager:MonoBehaviour
       return;
 
     CurrentWinState = WinState.Lose;
+    StartCoroutine(EndCoroutine());
     Debug.Log("LOSE");
   }
+
+  private IEnumerator EndCoroutine()
+  {
+    yield return new WaitForSeconds(2.5f);
+
+    CanHideUi = true;
+    
+    yield return new WaitForSeconds(1f);
+    
+    CompleteGame();
+  }
+
+  public bool CanHideUi { get; set; }
 }

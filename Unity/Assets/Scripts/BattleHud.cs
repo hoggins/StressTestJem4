@@ -98,6 +98,9 @@ namespace DefaultNamespace
         var canHideUi = GameManager.Instance.CanHideUi;
         c2.a = Mathf.Lerp(c2.a, canHideUi ? 0f : 1f, Time.deltaTime*(canHideUi ? 10f : 1.5f));
         EndText.color = c2;
+
+        var angle = EndText.transform.localEulerAngles;
+        EndText.transform.localEulerAngles = Vector3.Lerp(angle, new Vector3(0, 0, Mathf.Sin(Time.time*1) * 15), Time.deltaTime*3f);
       }
 
       if (GameManager.Instance.CurrentWinState == GameManager.WinState.Win)
