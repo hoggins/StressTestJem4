@@ -35,8 +35,8 @@ public class Portal : MonoBehaviour
     PortalFxRoot.gameObject.SetActive(true);
     
     IsActive = true;
-    var inst = GameObject.Instantiate(Explosion, Root.transform.position, Quaternion.identity);
-    Destroy(inst, 15);
+    // var inst = GameObject.Instantiate(Explosion, Root.transform.position, Quaternion.identity);
+    // Destroy(inst, 15);
     
     foreach (var particles in Fx.GetComponentsInChildren<ParticleSystem>())
     {
