@@ -15,6 +15,8 @@ public class FinalUiController : MonoBehaviour
 
   public Text TimeText;
 
+  public Image FadeInImage;
+
   void Start()
   {
     var targetCollect = Program.Score.Taken;
@@ -25,14 +27,16 @@ public class FinalUiController : MonoBehaviour
     // targetCleared = 350;
     // targetTime = TimeSpan.FromSeconds(300);
 
-    StartCoroutine(AnimateTextNumber(targetCollect, CollectText, 1.5f, SosObjects[0], 100));
-    StartCoroutine(AnimateTextNumber(targetCleared, ClearedText, 1.5f, SosObjects[1], 100));
-    StartCoroutine(AnimateTextTime(targetTime, TimeText, 1.5f, SosObjects[2], 180));
+    SosObjects[0].SetActive(targetCollect > 100);
+    SosObjects[1].SetActive(targetCleared > 100);
+    SosObjects[2].SetActive(targetTime < TimeSpan.FromSeconds(180));
 
+    StartCoroutine(AnimateTextNumber(targetCollect, CollectText, 2f, SosObjects[0], 100));
+    StartCoroutine(AnimateTextNumber(targetCleared, ClearedText, 2f, SosObjects[1], 100));
+    StartCoroutine(AnimateTextTime(targetTime, TimeText, 2f, SosObjects[2], 180));
 
-      SosObjects[0].SetActive(targetCollect > 100);
-      SosObjects[1].SetActive(targetCleared > 100);
-      SosObjects[2].SetActive(targetTime < TimeSpan.FromSeconds(180));
+    FadeInImage.enabled = true;
+    FadeInImage.CrossFadeAlpha(0, 0.5f, false);
   }
 
   public void HomeClick()
