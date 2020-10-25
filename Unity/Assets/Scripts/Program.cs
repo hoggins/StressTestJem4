@@ -35,7 +35,7 @@ public class Program : MonoBehaviour
     Instance = this;
     DontDestroyOnLoad(this);
 
-    Application.targetFrameRate = 30;
+    Application.targetFrameRate = 60;
     //Screen.SetResolution(1980,1080, FullScreenMode.ExclusiveFullScreen);
   }
 
