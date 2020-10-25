@@ -73,7 +73,7 @@ namespace DefaultNamespace
 
       if (IsPlayingRails)
       {
-        var vol = Mathf.Min(1f,moveMagnitude / maxRollSpeed);
+        var vol = Mathf.Min(1f,moveMagnitude / maxRollSpeed)*0.75f;
         rails.volume = vol;
       }
     }
